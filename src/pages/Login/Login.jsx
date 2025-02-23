@@ -1,9 +1,10 @@
-import React from 'react';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         // TODO: Implement form validation and submission logic
@@ -11,7 +12,7 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center lg:mt-0 mt-10">
+        <div className="min-h-screen flex items-center justify-center lg:mt-0 mt-10 px-4">
             <div className="bg-white p-8 rounded shadow-2xl w-full max-w-2xl">
                 <h2 className="text-2xl font-extrabold mb-6 text-center">Welcome back in SyntaxStory.</h2>
                 <div className="mt-6 flex flex-col space-y-4">

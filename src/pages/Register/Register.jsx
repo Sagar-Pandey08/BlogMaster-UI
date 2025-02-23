@@ -1,87 +1,100 @@
-import React from 'react';
-import { FaFacebook } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { FaFacebook } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
 const Register = () => {
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // TODO: Implement form validation and submission logic
-        console.log('Form submitted');
+
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center lg:mt-0 mt-10">
-            <div className="bg-white p-8 rounded shadow-2xl w-full max-w-2xl">
-                <h2 className="text-2xl font-extrabold mb-6 text-center">Join SyntaxStory.</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                            Username
-                        </label>
+        <div className="min-h-screen flex items-center justify-center  px-4 lg:mt-0 mt-10">
+            <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-lg">
+                <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+                    Join <span className="text-blue-500">SyntaxStory</span>
+                </h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Username */}
+                    <div>
+                        <label className="block text-gray-700 font-medium">Username</label>
                         <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="username"
                             type="text"
                             name="username"
-                            placeholder="Username"
+                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            placeholder="Enter your username"
+                            autoComplete="username"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                            Email
-                        </label>
+
+                    {/* Email */}
+                    <div>
+                        <label className="block text-gray-700 font-medium">Email</label>
                         <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="email"
                             type="email"
                             name="email"
-                            placeholder="Email"
+                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            placeholder="Enter your email"
+                            autoComplete="off"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                            Password
-                        </label>
+
+                    {/* Password */}
+                    <div>
+                        <label className="block text-gray-700 font-medium">Password</label>
                         <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="password"
                             type="password"
                             name="password"
-                            placeholder="Password"
+                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            placeholder="Enter your password"
+                            autoComplete="current-password"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="image">
-                            Profile Image
-                        </label>
+
+                    {/* Profile Image */}
+                    <div>
+                        <label className="block text-gray-700 font-medium">Profile Image</label>
                         <input
-                            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="image"
                             type="file"
                             name="image"
                             accept="image/*"
+                            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                         />
                     </div>
-                    <div className="flex items-center justify-center">
-                        <button
-                            className="bg-blue-500 hover:bg-blue-700 w-full text-white font-bold py-2 px-4  focus:outline-none focus:shadow-outline rounded-2xl"
-                            type="submit"
-                        >
-                            Register
-                        </button>
-                    </div>
-                </form>
-                <div className='mt-6 text-center font-semibold'>
-                    Already have an account? <Link to="/login" className='text-blue-500'>Sign in</Link>
-                </div>
-                <div className='divider'>or</div>
-                <div className="mt-6 flex flex-col space-y-4">
-                    <button className="flex items-center justify-center text-black font-bold py-2 px-4  rounded-3xl border-2 hover:bg-base-200 ">
-                        <FcGoogle className="mr-2 text-2xl" /> Sign in with Google
+
+                    {/* Register Button */}
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
+                    >
+                        Register
                     </button>
-                    <button className="flex items-center justify-center  text-black font-bold py-2 px-4 rounded-3xl border-2 hover:bg-base-200">
-                        <FaFacebook className="mr-2 text-blue-500 text-2xl" /> Sign in with Facebook
+                </form>
+
+                {/* Already Have an Account? */}
+                <p className="mt-4 text-center text-gray-600">
+                    Already have an account?{" "}
+                    <Link to="/login" className="text-blue-500 hover:underline">
+                        Sign in
+                    </Link>
+                </p>
+
+                <div className="flex items-center my-6">
+                    <hr className="flex-grow border-gray-300" />
+                    <span className="px-3 text-gray-500">OR</span>
+                    <hr className="flex-grow border-gray-300" />
+                </div>
+
+                {/* Social Logins */}
+                <div className="space-y-4">
+                    <button className="flex items-center justify-center w-full py-2 border rounded-lg hover:bg-gray-100 transition">
+                        <FcGoogle className="mr-2 text-2xl" />
+                        Sign in with Google
+                    </button>
+                    <button className="flex items-center justify-center w-full py-2 border rounded-lg hover:bg-gray-100 transition">
+                        <FaFacebook className="mr-2 text-blue-500 text-2xl" />
+                        Sign in with Facebook
                     </button>
                 </div>
             </div>
