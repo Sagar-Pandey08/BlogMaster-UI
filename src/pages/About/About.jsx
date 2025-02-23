@@ -3,7 +3,7 @@ import React from "react";
 const About = () => {
   return (
     <div className="max-w-5xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-20">
-      <h1 className="text-4xl font-extrabold text-center text-blue-600 mb-6">About SyntexStory</h1>
+      <h1 className="text-4xl font-extrabold text-center text-blue-600 mb-6">About SyntaxStory</h1>
       <p className="text-xl text-gray-700 text-center mb-6 leading-relaxed">
         Welcome to <strong>SyntexStory</strong>, where storytelling meets technology, creativity, and inspiration.
       </p>
@@ -50,7 +50,7 @@ const About = () => {
       </section>
 
       <div className="text-center mt-12">
-        <p className="text-xl font-medium text-gray-700">Thank you for visiting <strong>SyntexStory</strong>! Join our community and explore more amazing content.</p>
+        <p className="text-xl font-medium text-gray-700">Thank you for visiting <strong>SyntaxStory</strong>! Join our community and explore more amazing content.</p>
       </div>
     </div>
   );
