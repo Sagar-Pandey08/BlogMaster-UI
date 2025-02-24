@@ -7,7 +7,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const Register = () => {
-    const { register, profileUpdate } = useContext(AuthContext)
+    const { register, profileUpdate, googleLogin } = useContext(AuthContext)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,12 +46,32 @@ const Register = () => {
                             })
                     }
                 })
-
         })
-
-
-
     };
+
+
+    const handleGoogle = (e)=>{
+        e.preventDefault();
+        googleLogin()
+           .then(res => {
+                if (res.user) {
+                    profileUpdate(res.user.displayName, res.user.photoURL)
+                        .then(() => {
+                            Swal.fire({
+                                title: "Login Successful!",
+                                text: "You can now use Google Login.",
+                                icon: "success",
+                                confirmButtonText: "Continue",
+                                confirmButtonColor: "#4caf50"
+                            }).then((result) => {
+                            })
+                        })
+                }
+            })
+           .catch(err => {
+                console.error(err);
+            })
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center  px-4 lg:mt-0 mt-10">
@@ -132,7 +152,7 @@ const Register = () => {
 
                 {/* Social Logins */}
                 <div className="space-y-4">
-                    <button className="flex items-center justify-center w-full py-2 border rounded-lg hover:bg-gray-100 transition">
+                    <button onClick={handleGoogle} className="flex items-center justify-center w-full py-2 border rounded-lg hover:bg-gray-100 transition">
                         <FcGoogle className="mr-2 text-2xl" />
                         Sign in with Google
                     </button>

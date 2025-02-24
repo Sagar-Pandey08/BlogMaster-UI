@@ -6,7 +6,7 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 
 const Login = () => {
-    const {login} = useContext(AuthContext)
+    const {login, googleLogin} = useContext(AuthContext)
     const navigate = useNavigate()
 
 
@@ -39,12 +39,36 @@ const Login = () => {
         });
     };
 
+    const handleGoogle = (e)=>{
+        e.preventDefault();
+        googleLogin()
+       .then(res =>{
+         if(res.user){
+             Swal.fire({
+                 title: 'Login successful',
+                 text: 'Welcome to SyntaxStory!',
+                 icon:'success',
+                 confirmButtonText: 'Go to Homepage'
+             })
+             navigate("/")
+         }
+       })
+       .catch(err =>{
+         Swal.fire({
+                 title: 'Error',
+                 text: err.message,
+                 icon: 'error',
+                 confirmButtonText: 'Try again'
+             })
+       })
+    }
+
     return (
         <div className="min-h-screen flex items-center justify-center lg:mt-0 mt-10 px-4">
             <div className="bg-white p-8 rounded shadow-2xl w-full max-w-2xl">
                 <h2 className="text-2xl font-extrabold mb-6 text-center">Welcome back in SyntaxStory.</h2>
                 <div className="mt-6 flex flex-col space-y-4">
-                    <button className="flex items-center justify-center text-black font-bold py-2 px-4  rounded-3xl border-2 hover:bg-base-200 ">
+                    <button onClick={handleGoogle} className="flex items-center justify-center text-black font-bold py-2 px-4  rounded-3xl border-2 hover:bg-base-200 ">
                         <FcGoogle className="mr-2 text-2xl" /> Sign in with Google
                     </button>
                     <button className="flex items-center justify-center  text-black font-bold py-2 px-4 rounded-3xl border-2 hover:bg-base-200">
