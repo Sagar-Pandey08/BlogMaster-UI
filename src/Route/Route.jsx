@@ -8,6 +8,7 @@ import About from "../pages/About/About";
 import AllBlogs from "../pages/AllBlogs/AllBlogs";
 import Register from "../pages/Register/Register";
 import Login from "../pages/Login/Login";
+import ContactPage from "../pages/ContactPage/ContactPage";
 
 const Route = createBrowserRouter([
     {
@@ -34,6 +35,10 @@ const Route = createBrowserRouter([
             {
                 path:'/login',
                 element: <Login></Login>
+            },
+            {
+                path:'/contact',
+                element: <ContactPage></ContactPage>
             }
         ]
     }

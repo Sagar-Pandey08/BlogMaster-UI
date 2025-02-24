@@ -6,6 +6,7 @@ import Categories from '../../components/Categories/Categories'
 import Author from '../../components/Author/Author'
 import Testimonials from '../../components/Testimonials/Testimonials'
 import Subscription from '../../components/Subscription/Subscription'
+import ReadBook from '../../components/ReadBook/ReadBook'
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <LatestPost />
       <FeaturedBlogs/>
       <Categories/>
+      <ReadBook></ReadBook>
       <Author/>
       <Testimonials/>
       <Subscription/>
