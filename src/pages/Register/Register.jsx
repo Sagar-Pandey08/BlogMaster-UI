@@ -1,17 +1,42 @@
+import { useContext } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Register = () => {
+    const {register} = useContext(AuthContext)
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const image = form.image.files[0];
+
+        const userInfo = {
+            email,
+            password,
+            name,
+            image
+        }
+        // console.log(userInfo)
+        register(email,password)
+        .then(res => {
+            alert("User registered successfully")
+            // Clear form inputs
+            form.reset();
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
 
     };
 
     return (
         <div className="min-h-screen flex items-center justify-center  px-4 lg:mt-0 mt-10">
-            <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-lg">
+            <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl">
                 <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
                     Join <span className="text-blue-500">SyntaxStory</span>
                 </h2>
@@ -21,10 +46,10 @@ const Register = () => {
                         <label className="block text-gray-700 font-medium">Username</label>
                         <input
                             type="text"
-                            name="username"
+                            name="name"
                             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                             placeholder="Enter your username"
-                            autoComplete="username"
+                            autoComplete="name"
                         />
                     </div>
 

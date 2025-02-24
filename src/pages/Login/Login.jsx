@@ -1,14 +1,30 @@
+import { useContext } from 'react';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Login = () => {
+    const {login} = useContext(AuthContext)
+    const navigate = useNavigate()
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // TODO: Implement form validation and submission logic
-        console.log('Form submitted');
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        login(email, password)
+        .then(res =>{
+            if(res.user){
+                alert("Login Successful")
+                form.reset();
+                navigate("/")
+            }
+        })
+        .catch(err => {
+            alert("Failed to login. Please check your credentials.")
+        });
     };
 
     return (

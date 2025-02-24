@@ -1,7 +1,10 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Header = () => {
+    const {user,logOut} = useContext(AuthContext)
+    const navigate = useNavigate()
     const Links = <>
         <li><NavLink to="/" className="text-lg font-medium hover:text-blue-500 transition">Home</NavLink></li>
         <li><NavLink to="/about" className="text-lg font-medium hover:text-blue-500 transition">About us</NavLink></li>
@@ -9,6 +12,12 @@ const Header = () => {
         <li><NavLink to="/dashboard" className="text-lg font-medium hover:text-blue-500 transition">Dashboard</NavLink></li>
         <li><NavLink to="/contact" className="text-lg font-medium hover:text-blue-500 transition">Contact</NavLink></li>
     </>;
+
+
+    const handleSignOut = () => {
+        logOut()
+        navigate("/")
+    }
 
     return (
         <div className=" fixed z-10  navbar bg-gradient-to-r from-white to-base-300 text-[#000] py-4 shadow-lg">
@@ -42,7 +51,15 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login' className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition">Login</Link>
+                {user? (
+                    <div className="flex items-center space-x-2">
+                        <button onClick={handleSignOut} to="/logout" className="btn btn-ghost">Logout</button>
+                    </div>
+                ) : (
+                    <div className="flex items-center space-x-2">
+                        <Link to="/login" className="btn btn-primary">Login</Link>
+                    </div>
+                )}
             </div>
         </div>
     );
