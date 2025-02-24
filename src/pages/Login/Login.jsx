@@ -3,6 +3,7 @@ import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const {login} = useContext(AuthContext)
@@ -17,13 +18,24 @@ const Login = () => {
         login(email, password)
         .then(res =>{
             if(res.user){
-                alert("Login Successful")
+               Swal.fire({
+                 title: 'Login successful',
+                 text: 'Welcome to SyntaxStory!',
+                 icon:'success',
+                 confirmButtonText: 'Go to Homepage'
+               })
                 form.reset();
                 navigate("/")
             }
         })
         .catch(err => {
-            alert("Failed to login. Please check your credentials.")
+             Swal.fire({
+                 title: 'Error',
+                 text: err.message,
+                 icon: 'error',
+                 confirmButtonText: 'Try again'
+             })
+             form.reset();
         });
     };
 

@@ -1,11 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Register = () => {
-    const {register} = useContext(AuthContext)
+    const { register, profileUpdate } = useContext(AuthContext)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,24 +15,41 @@ const Register = () => {
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        const image = form.image.files[0];
+        const imageFirst = form.image.files[0];
 
-        const userInfo = {
-            email,
-            password,
-            name,
-            image
-        }
-        // console.log(userInfo)
-        register(email,password)
-        .then(res => {
-            alert("User registered successfully")
-            // Clear form inputs
-            form.reset();
+        const formData = new FormData();
+        formData.append("image", imageFirst);
+
+        // upload image in imagbb;
+        const response = axios.post('https://api.imgbb.com/1/upload?key=ebced42c75e22d67b350b68860e7277c', formData)
+
+        response.then(res => {
+            const image = res.data.data.url;
+            // register user in firebase auth
+            register(email, password)
+                .then(res => {
+                    if (res.user) {
+                        profileUpdate(name, image)
+                            .then(() => {
+                                Swal.fire({
+                                    title: "Registration Successful!",
+                                    text: "You can now login with your new account.",
+                                    icon: "success",
+                                    confirmButtonText: "Login",
+                                    confirmButtonColor: "#4caf50"
+                                }).then((result) => {
+                                })
+                                form.reset();
+                            })
+                            .catch(err => {
+                                console.error(err);
+                            })
+                    }
+                })
+
         })
-        .catch(err => {
-            console.log(err.message)
-        })
+
+
 
     };
 

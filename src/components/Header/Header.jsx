@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Header = () => {
-    const {user,logOut} = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
     const navigate = useNavigate()
     const Links = <>
         <li><NavLink to="/" className="text-lg font-medium hover:text-blue-500 transition">Home</NavLink></li>
@@ -14,10 +15,29 @@ const Header = () => {
     </>;
 
 
-    const handleSignOut = () => {
-        logOut()
-        navigate("/")
-    }
+
+    const handleSignOut = async () => {
+        try {
+            const result = await Swal.fire({
+                title: "Are you sure?",
+                text: "You will be logged out!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, Logout"
+            });
+
+            if (result.isConfirmed) {
+                await logOut();
+                Swal.fire("Logged Out!", "You have been signed out successfully.", "success");
+                navigate("/");
+            }
+        } catch (error) {
+            Swal.fire("Error!", error.message, "error");
+        }
+    };
+
 
     return (
         <div className=" fixed z-10  navbar bg-gradient-to-r from-white to-base-300 text-[#000] py-4 shadow-lg">
@@ -51,16 +71,36 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                {user? (
-                    <div className="flex items-center space-x-2">
-                        <button onClick={handleSignOut} to="/logout" className="btn btn-ghost">Logout</button>
+                {user ? (
+                    <div className="flex items-center space-x-3">
+                        {/* User Profile Picture & Name */}
+                        <div className="flex items-center space-x-2 ">
+                            <img
+                                src={user.photoURL || "/default-avatar.png"}
+                                alt="Profile"
+                                className="w-8 h-8 rounded-full border border-gray-300 hidden lg:block "
+                            />
+                            <span className="text-black font-medium hidden lg:block ">{user.displayName || "User"}</span>
+                        </div>
+
+                        {/* Logout Button */}
+                        <button
+                            onClick={handleSignOut}
+                            className="btn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition duration-300"
+                        >
+                            Logout
+                        </button>
                     </div>
                 ) : (
                     <div className="flex items-center space-x-2">
-                        <Link to="/login" className="btn btn-primary">Login</Link>
+                        {/* Login Button */}
+                        <Link to="/login" className="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
+                            Login
+                        </Link>
                     </div>
                 )}
             </div>
+
         </div>
     );
 };

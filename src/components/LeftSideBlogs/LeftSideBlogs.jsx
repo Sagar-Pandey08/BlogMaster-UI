@@ -82,14 +82,14 @@ const LeftSideBlogs = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 3 // Number of posts to display per page
   const totalPages = Math.ceil(allBlogs.length / postsPerPage); // Total number of pages
-  console.log('total page number', totalPages)
+  // console.log('total page number', totalPages)
 
 
   // Pagination Logic
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = allBlogs.slice(indexOfFirstPost, indexOfLastPost);
-  console.log("current page", currentPage)
+  // console.log("current page", currentPage)
 
   const goToPage = (page) => {
     setCurrentPage(page);
