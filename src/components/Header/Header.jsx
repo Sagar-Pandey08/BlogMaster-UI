@@ -86,16 +86,16 @@ const Header = () => {
                         {/* Logout Button */}
                         <button
                             onClick={handleSignOut}
-                            className="btn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition duration-300"
+                            className="  font-bold text-black px-4 py-2 rounded-md transition duration-300 hover:cursor-pointer hover:text-purple-500"
                         >
-                            Logout
+                            Sing out
                         </button>
                     </div>
                 ) : (
                     <div className="flex items-center space-x-2">
                         {/* Login Button */}
-                        <Link to="/login" className="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition duration-300">
-                            Login
+                        <Link to="/login" className=" font-bold  text-black px-4 py-2 rounded-md transition duration-300 hover:cursor-pointer hover:text-purple-500">
+                            Sign in
                         </Link>
                     </div>
                 )}
