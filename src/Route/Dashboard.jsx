@@ -31,7 +31,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Dashboard Content */}
-                <div className='w-3/4 p-5'>
+                <div className='w-3/4 mx-auto'>
                     <Outlet />
                 </div>
             </div>
