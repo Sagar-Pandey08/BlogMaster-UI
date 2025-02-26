@@ -21,11 +21,12 @@ const Dashboard = () => {
                         <li><NavLink to='/dashboard/feedback' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaComment /> Send Feedback</NavLink></li>
                         <li><NavLink to='/' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#EFDCAB] text-gray-900 hover:text-black transition duration-300'><FaHome /> Home</NavLink></li>
                         <div className='divider text-gray-400'>or</div>
+                                                {/* Admin Route */}
                         <li><NavLink to='/allBlogs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaList /> All Blogs</NavLink></li>
                         <li><NavLink to='/manageUsers' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaUser /> Manage Users</NavLink></li>
                         <li><NavLink to='/manageUsers' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaList /> Manage Blogs</NavLink></li>
-                        {/* Admin Route */}
-                        <li><NavLink to='/admin/settings' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaCog /> Admin Settings</NavLink></li>
+                        <li><NavLink to='/' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#EFDCAB] text-gray-900 hover:text-black transition duration-300'><FaHome /> Home</NavLink></li>
+
                     </ul>
                 </div>
 
