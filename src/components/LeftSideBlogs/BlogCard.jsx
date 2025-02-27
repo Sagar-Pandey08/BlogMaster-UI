@@ -41,9 +41,9 @@ const BlogCard = ({ blog }) => {
             <img className="w-full h-64 object-cover rounded-2xl" src={blog.image} alt={blog.title} />
             <div>
                 <h3 className="text-lg font-semibold text-gray-800">{blog.title}</h3>
-                <p className="text-gray-500 text-sm">By {blog.author} • {blog.time} • <span className='font-medium'>{blog.category}</span></p>
+                <p className="text-gray-500 text-sm">By {blog.author_name} • {blog.date_time} • <span className='font-medium'>{blog.category}</span></p>
             </div>
-            <p className="text-gray-600 mt-2">{blog.description}</p>
+            <p className="text-gray-600 mt-2">{blog.short_description}</p>
             <div className="flex justify-between items-center mt-4 text-gray-600 text-sm border-t pt-2 gap-1">
                 <button className={`flex items-center gap-1 ${liked ? 'text-blue-500' : ''}`}
                     onClick={handleLikeClick} > <AiFillLike className='text-2xl' /> Like {likes}</button>
