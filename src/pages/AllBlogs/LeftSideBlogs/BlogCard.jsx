@@ -5,7 +5,7 @@ const BlogCard = ({ blog }) => {
 
     return (
         <div>
-            <Link to={`/blog/${blog._id}`}>
+            <Link to={`/blogs/${blog._id}`}>
                 <div key={blog.id} className="bg-white shadow-md rounded-lg overflow-hidden mb-6 border border-gray-200 p-4 flex justify-between gap-4 transition duration-300 ease-in-out transform hover:scale-105 hover:cursor-pointer">
                     <div>
                         <p className="text-gray-500 text-lg"><span className='font-medium'>{blog.category}</span> by {blog.author_name}.</p>
