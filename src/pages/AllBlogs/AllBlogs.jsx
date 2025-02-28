@@ -1,6 +1,6 @@
 import React from 'react'
-import RightSide from '../../components/RightSide/RightSide'
-import LeftSideBlogs from '../../components/LeftSideBlogs/LeftSideBlogs'
+import RightSide from './RightSide/RightSide'
+import LeftSideBlogs from './LeftSideBlogs/LeftSideBlogs'
 
 const AllBlogs = () => {
     return (

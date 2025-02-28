@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import BlogCard from './BlogCard';
-import useAllBlogs from '../Hooks/useallBlogs';
+import useAllBlogs from '../../../components/Hooks/useallBlogs';
 
 
 
@@ -9,7 +9,7 @@ const LeftSideBlogs = () => {
   const { allBlogs } = useAllBlogs()
   // console.log(allBlogs)
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 3 // Number of posts to display per page
+  const postsPerPage = 4 // Number of posts to display per page
   const totalPages = Math.ceil(allBlogs.length / postsPerPage); // Total number of pages
   // console.log('total page number', totalPages)
 
@@ -29,7 +29,7 @@ const LeftSideBlogs = () => {
     <div className="w-full lg:max-w-3xl">
       {/* Blog Posts */}
       {currentPosts.map((blog) => (
-        <BlogCard key={blog.id} blog={blog} />
+        <BlogCard  key={blog.id} blog={blog} />
       ))}
 
       {/* Pagination Controls */}
