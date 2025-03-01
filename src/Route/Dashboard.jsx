@@ -16,7 +16,7 @@ const Dashboard = () => {
                 <div className={`bg-[#EFDCAB]  p-5 w-64 space-y-4 transition-all duration-300 ${isOpen ? 'block' : 'hidden'} md:block`}>
                     <ul className='space-y-2'>
                         <li><NavLink to='/dashboard/writeBlogs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaPen /> Write Blogs</NavLink></li>
-                        <li><NavLink to='/dashboard' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaList /> My Blogs</NavLink></li>
+                        <li><NavLink to='/dashboard/myBlog' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaList /> My Blogs</NavLink></li>
                         <li><NavLink to='/dashboard/manageBlogs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaList /> Manage Blogs</NavLink></li>
                         <li><NavLink to='/dashboard/feedback' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaComment /> Send Feedback</NavLink></li>
                         <li><NavLink to='/' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#EFDCAB] text-gray-900 hover:text-black transition duration-300'><FaHome /> Home</NavLink></li>

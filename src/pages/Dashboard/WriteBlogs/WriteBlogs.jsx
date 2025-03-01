@@ -14,6 +14,7 @@ const WriteBlogs = () => {
     const details = form.details.value;
     const category = form.category.value;
     const author = form.author.value;
+    const email = form.email.value;
     const dateTime = form.dateTime.value;
     const image = form.image.files[0]
 
@@ -33,6 +34,7 @@ const WriteBlogs = () => {
         blog_details: details,
         category: category,
         author_name: author,
+        email: email,
         date_time: dateTime,
         image: imageUrl,
         likes: 0
@@ -64,6 +66,7 @@ const WriteBlogs = () => {
         <textarea name='details' placeholder='Blog Details' className='w-full p-2 border rounded-lg t transition duration-300 focus:scale-105 focus-visible:text-[#CB9DF0]' required />
         <input name='category' type='text' placeholder='Category' className='w-full p-2 border rounded-lg t transition duration-300 focus:scale-105 focus-visible:text-[#CB9DF0]' required />
         <input name='author' type='text' placeholder='Writer Name' className='w-full p-2 border rounded-lg t transition duration-300 focus:scale-105 focus-visible:text-[#CB9DF0]' required />
+        <input name='email' type='email' placeholder='Writer Email' className='w-full p-2 border rounded-lg t transition duration-300 focus:scale-105 focus-visible:text-[#CB9DF0]' required />
         <input name='dateTime' type='datetime-local' className='w-full p-2 border rounded-lg t transition duration-300 focus:scale-105 focus-visible:text-[#CB9DF0]' required />
         <input name='image' type='file' className='w-full p-2 border rounded-lg t transition duration-300 focus:scale-105 focus-visible:text-[#CB9DF0]' required />
         <button
