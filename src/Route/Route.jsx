@@ -13,6 +13,7 @@ import Dashboard from "./Dashboard";
 import WriteBlogs from "../pages/Dashboard/WriteBlogs/WriteBlogs";
 import Feedback from "../pages/Dashboard/Feedback/Feedback";
 import SingleBlogs from "../pages/AllBlogs/SingleBlogs";
+import PrivateRoute from "../pages/PrivateRoute/PrivateRoute";
 
 const Route = createBrowserRouter([
     {
@@ -57,7 +58,7 @@ const Route = createBrowserRouter([
         children:[
             {
                 path:"writeBlogs",
-                element: <WriteBlogs></WriteBlogs>
+                element: <PrivateRoute> <WriteBlogs></WriteBlogs></PrivateRoute>
             },
             {
                 path:'feedback',
