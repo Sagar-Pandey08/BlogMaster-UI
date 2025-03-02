@@ -4,31 +4,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
+import useReview from '../Hooks/useReview';
 
 const Testimonials = () => {
-    const reviews = [
-        {
-            image: 'https://i.ibb.co.com/QpNDpmR/Ellipse-91.png',
-            name: 'John Doe',
-            designation: 'CEO, TechCorp',
-            rating: 5,
-            review: 'This product changed my life! Highly recommend it.',
-        },
-        {
-            image: 'https://i.ibb.co.com/ZWzykDF/Ellipse-92.png',
-            name: 'Jane Smith',
-            designation: 'Marketing Manager, XYZ Inc.',
-            rating: 4,
-            review: 'Amazing service, would definitely use it again.',
-        },
-        {
-            image: 'https://i.ibb.co.com/jkPQShw/Ellipse-2.png',
-            name: 'Sam Brown',
-            designation: 'Freelance Developer',
-            rating: 5,
-            review: 'A fantastic experience from start to finish!',
-        },
-    ];
+    const { reviews } = useReview()
 
     return (
         <section data-aos="fade-up-left" className=" py-16">
