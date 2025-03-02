@@ -15,6 +15,7 @@ import Feedback from "../pages/Dashboard/Feedback/Feedback";
 import SingleBlogs from "../pages/AllBlogs/SingleBlogs";
 import PrivateRoute from "../pages/PrivateRoute/PrivateRoute";
 import MyBlog from "../pages/Dashboard/MyBlog/MyBlog";
+import ManageBlogs from "../pages/Dashboard/ManageBlogs/ManageBlogs";
 
 const Route = createBrowserRouter([
     {
@@ -68,6 +69,10 @@ const Route = createBrowserRouter([
             {
                 path:'myBlog',
                 element: <MyBlog></MyBlog>
+            },
+            {
+                path:'manageBlogs',
+                element: <ManageBlogs></ManageBlogs>
             }
         ]
     }

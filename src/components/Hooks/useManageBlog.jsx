@@ -3,7 +3,7 @@ import { AuthContext } from '../../AuthProvider/AuthProvider'
 import { useQuery } from '@tanstack/react-query'
 import useAxiosPublic from './AxiosPublic/useaxiosPublic'
 
-const usemyBlog = () => {
+const useManageBlog = () => {
     const { user } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic()
 
@@ -18,4 +18,4 @@ const usemyBlog = () => {
     return { blogs, refetch }
 }
 
-export default usemyBlog
+export default useManageBlog
