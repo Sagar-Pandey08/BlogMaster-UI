@@ -25,7 +25,7 @@ const WriteBlogs = () => {
 
     //send image in imagebb and get url then send in database
     const response = axios.post("https://api.imgbb.com/1/upload?key=425000ec487abe2b84d0bb7de5769c3a", formData)
-    console.log(response)
+    // console.log(response)
     response.then((res) => {
       const imageUrl = res.data.data.url;
       axiosPublic.post('/blogs', {
