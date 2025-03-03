@@ -42,7 +42,7 @@ const SingleBlogs = () => {
 
     return (
 
-        <div key={blog.id} className="bg-white shadow-md rounded-lg overflow-hidden mb-6 border border-gray-200 p-4 mt-28">
+        <div key={blog.id} className="bg-white shadow-md rounded-lg overflow-hidden mb-6 border border-gray-200 p-4 mt-28 min-h-screen">
             <img className="w-full h-full object-cover rounded-2xl" src={blog.image} alt={blog.title} />
             <div className='mt-4'>
                 <h3 className="text-2xl lg:text-4xl font-bold text-gray-800 lg:text-center">{blog.title}</h3>

@@ -1,44 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useMyBlogs from '../../../components/Hooks/useMyBlogs';
+import { Link } from 'react-router-dom';
 
 const MyBlog = () => {
   const { myBlogs } = useMyBlogs();
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 3; // Number of posts to display per page
+  const totalPages = Math.ceil(myBlogs.length / postsPerPage); // Total number of pages
+
+  // Pagination Logic
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = myBlogs.slice(indexOfFirstPost, indexOfLastPost);
+
+  const goToPage = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="container mx-auto p-6 md:p-10 lg:p-14 min-h-screen">
       <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-900">My Articles</h1>
-      {myBlogs && myBlogs.length > 0 ? (
-        <div className="grid lg:grid-cols-3 gap-6">
-          {myBlogs.map((blog) => (
-            <div
-              key={blog._id}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow"
-            >
-              <div className="p-6">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-3 hover:text-blue-600 transition">
-                  {blog.title}
-                </h2>
-                <p className="text-gray-500 text-sm mb-4">
-                  {new Date(blog.date_time).toLocaleDateString('en-US', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </p>
-                <p className="text-gray-700 text-base leading-relaxed mb-4">
-                  {blog.blog_details.slice(0, 150)}...
-                </p>
-                <button className="px-5 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition">
-                  Read More
-                </button>
-              </div>
+      {currentPosts.map((blog) => (
+        <Link key={blog._id} to={`/blogs/${blog._id}`}>
+          <div className="bg-white shadow-md rounded-lg overflow-hidden mb-6 border border-gray-200 p-4 flex justify-between gap-4 transition duration-300 ease-in-out transform hover:scale-105 hover:cursor-pointer">
+            <div>
+              <p className="text-gray-500 text-lg"><span className='font-medium'>{blog.category}</span> by {blog.author_name}.</p>
+              <h3 className="text-3xl font-bold text-gray-800 hover:text-blue-600 transition duration-200">{blog.title}</h3>
+              <p className="text-gray-600 mt-2">{blog.short_description}</p>
             </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-gray-500 text-center text-lg">No blogs found.</p>
-      )}
+            <img className="h-28 w-36 lg:w-40 lg:h-40 object-cover rounded-xl" src={blog.image} alt={blog.title} />
+          </div>
+        </Link>
+      ))}
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center items-center space-x-2 mt-10">
+        <button
+          onClick={() => goToPage(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400"
+        >
+          Prev
+        </button>
+
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToPage(index + 1)}
+            className={`px-4 py-2 rounded-lg ${currentPage === index + 1
+              ? "bg-blue-600 text-white"
+              : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => goToPage(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

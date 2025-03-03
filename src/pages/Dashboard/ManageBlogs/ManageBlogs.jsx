@@ -12,7 +12,7 @@ const ManageBlogs = () => {
 
             <table className="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
                 {/* Table Head */}
-                <thead className="bg-[#80CBC4] ">
+                <thead className="bg-[#FFF2DB] ">
                     <tr className="text-left">
                         <th className="px-4 py-3">Name</th>
                         <th className="px-4 py-3">Email</th>
