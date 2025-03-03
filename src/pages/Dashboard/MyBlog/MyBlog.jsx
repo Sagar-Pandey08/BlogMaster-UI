@@ -18,8 +18,8 @@ const MyBlog = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 md:p-10 lg:p-14 min-h-screen">
-      <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-900">My Articles</h1>
+    <div className="min-h-screen p-6">
+      <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-900">My Blogs</h1>
       {currentPosts.map((blog) => (
         <Link key={blog._id} to={`/blogs/${blog._id}`}>
           <div className="bg-white shadow-md rounded-lg overflow-hidden mb-6 border border-gray-200 p-4 flex justify-between gap-4 transition duration-300 ease-in-out transform hover:scale-105 hover:cursor-pointer">
@@ -28,7 +28,7 @@ const MyBlog = () => {
               <h3 className="text-3xl font-bold text-gray-800 hover:text-blue-600 transition duration-200">{blog.title}</h3>
               <p className="text-gray-600 mt-2">{blog.short_description}</p>
             </div>
-            <img className="h-28 w-36 lg:w-40 lg:h-40 object-cover rounded-xl" src={blog.image} alt={blog.title} />
+            <img className="h-28 w-36 lg:w-40 lg:h-40 object-cover rounded-xl justify-center items-center" src={blog.image} alt={blog.title} />
           </div>
         </Link>
       ))}
