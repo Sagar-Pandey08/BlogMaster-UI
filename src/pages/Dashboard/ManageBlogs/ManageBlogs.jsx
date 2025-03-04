@@ -37,7 +37,7 @@ const ManageBlogs = () => {
     }
 
 
-   
+
     return (
         <div className="overflow-x-auto p-4">
             <h1 className="text-2xl font-extrabold text-gray-800 mb-4 text-center">
@@ -48,6 +48,7 @@ const ManageBlogs = () => {
                 {/* Table Head */}
                 <thead className="bg-[#FFF2DB] ">
                     <tr className="text-left">
+                        <th className="px-4 py-3">#</th>
                         <th className="px-4 py-3">Name</th>
                         <th className="px-4 py-3">Email</th>
                         <th className="px-4 py-3">Title</th>
@@ -64,6 +65,7 @@ const ManageBlogs = () => {
                             className={`border-b ${index % 2 === 0 ? "bg-gray-100" : "bg-white"
                                 } hover:bg-gray-200 transition`}
                         >
+                            <td className="px-4 py-3 text-gray-700">{index + 1}.</td>
                             <td className="px-4 py-3 font-medium text-gray-800">
                                 {blog.author_name}
                             </td>
