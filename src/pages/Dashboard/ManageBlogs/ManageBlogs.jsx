@@ -2,9 +2,10 @@ import React from 'react';
 import useManageBlog from '../../../components/Hooks/useManageBlog';
 import useAxiosPublic from '../../../components/Hooks/AxiosPublic/useaxiosPublic';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const ManageBlogs = () => {
-    const {refetch, blogs } = useManageBlog();
+    const { refetch, blogs } = useManageBlog();
     const axiosPubic = useAxiosPublic()
 
     const handleRemove = (id) => {
@@ -35,6 +36,8 @@ const ManageBlogs = () => {
         });
     }
 
+
+   
     return (
         <div className="overflow-x-auto p-4">
             <h1 className="text-2xl font-extrabold text-gray-800 mb-4 text-center">
@@ -67,9 +70,9 @@ const ManageBlogs = () => {
                             <td className="px-4 py-3 text-gray-700">{blog.email}</td>
                             <td className="px-4 py-3 text-gray-700">{blog.title}</td>
                             <td className="px-4 py-3">
-                                <button className="bg-[#2DAA9E] text-black px-4 py-1 rounded-md text-sm hover:bg-[#80CBC4] transition">
+                                <Link to={`/updateBlog/${blog._id}`} className="bg-[#2DAA9E] text-black px-4 py-1 rounded-md text-sm hover:bg-[#80CBC4] transition">
                                     Edit
-                                </button>
+                                </Link>
                             </td>
                             <td className="px-4 py-3">
                                 <button onClick={() => handleRemove(blog._id)} className="bg-red-500 text-white px-4 py-1 rounded-md text-sm hover:bg-red-600 transition">

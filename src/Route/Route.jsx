@@ -16,6 +16,7 @@ import SingleBlogs from "../pages/AllBlogs/SingleBlogs";
 import PrivateRoute from "../pages/PrivateRoute/PrivateRoute";
 import MyBlog from "../pages/Dashboard/MyBlog/MyBlog";
 import ManageBlogs from "../pages/Dashboard/ManageBlogs/ManageBlogs";
+import UpdateBlog from "../pages/Dashboard/ManageBlogs/UpdateBlog";
 
 const Route = createBrowserRouter([
     {
@@ -51,6 +52,11 @@ const Route = createBrowserRouter([
                 path:'/blogs/:id',
                 element: <SingleBlogs></SingleBlogs>,
                 loader: ({params})=>fetch(`http://localhost:5000/blogs/${params.id}`)
+            },
+            {
+                path:'/updateBlog/:id',
+                element: <UpdateBlog></UpdateBlog>,
+                loader: ({params})=>fetch(`http://localhost:5000/blog/${params.id}`)
             }
         ]
     },
