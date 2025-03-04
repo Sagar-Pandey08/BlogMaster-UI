@@ -1,28 +1,61 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaFacebook, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../components/Hooks/AxiosPublic/useaxiosPublic";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const axiosPublic = useAxiosPublic()
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
-      Swal.fire("Oops!", "Please fill in all required fields.", "warning");
-      return;
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const subject = form.subject.value;
+    const message = form.message.value;
+
+    if (!user) {
+      Swal.fire({
+        title: "Please Login First",
+        text: "You need to be logged in to send a message.",
+        icon: "info",
+        confirmButtonText: "Login"
+
+      })
+      navigate("/login")
+    } else {
+      axiosPublic.post("/contact", {
+        name,
+        email,
+        subject,
+        message
+      })
+        .then(res => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              title: "Message Sent!",
+              text: "Thank you for reaching out! We will get back to you shortly.",
+              icon: "success",
+              confirmButtonText: "Cool"
+            })
+            form.reset();
+          }
+        })
+        .catch(err => {
+          Swal.fire({
+            title: "Error!",
+            text: "Failed to send message. Please try again later.",
+            icon: "error",
+            confirmButtonText: "Try Again"
+          })
+        })
     }
-    Swal.fire("Success!", "Your message has been sent.", "success");
-    setFormData({ name: "", email: "", subject: "", message: "" });
-  };
+
+  }
 
   return (
     <div className=" bg-gradient-to-r from-blue-500 to-indigo-600 p-6 grid lg:grid-cols-2 gap-4 mt-28">
@@ -30,10 +63,10 @@ const ContactPage = () => {
         {/* Contact Section */}
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">📩 Contact Us</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} className="w-full p-3 border rounded-md focus:ring-4 focus:ring-blue-500 shadow-sm" required />
-          <input type="email" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} className="w-full p-3 border rounded-md focus:ring-4 focus:ring-blue-500 shadow-sm" required />
-          <input type="text" name="subject" placeholder="Subject" value={formData.subject} onChange={handleChange} className="w-full p-3 border rounded-md focus:ring-4 focus:ring-blue-500 shadow-sm" />
-          <textarea name="message" placeholder="Your Message" value={formData.message} onChange={handleChange} className="w-full p-3 border rounded-md focus:ring-4 focus:ring-blue-500 shadow-sm h-32" required />
+          <input type="text" name="name" placeholder="Your Name" className="w-full p-3 border rounded-md focus:ring-4 focus:ring-blue-500 shadow-sm" required />
+          <input type="email" name="email" placeholder="Your Email" className="w-full p-3 border rounded-md focus:ring-4 focus:ring-blue-500 shadow-sm" required />
+          <input type="text" name="subject" placeholder="Subject" className="w-full p-3 border rounded-md focus:ring-4 focus:ring-blue-500 shadow-sm" />
+          <textarea name="message" placeholder="Your Message" className="w-full p-3 border rounded-md focus:ring-4 focus:ring-blue-500 shadow-sm h-32" required />
           <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-all shadow-md">Send Message</button>
         </form>
         {/* Social Media Links */}
