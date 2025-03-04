@@ -1,13 +1,44 @@
 import React from 'react';
 import useManageBlog from '../../../components/Hooks/useManageBlog';
+import useAxiosPublic from '../../../components/Hooks/AxiosPublic/useaxiosPublic';
+import Swal from 'sweetalert2';
 
 const ManageBlogs = () => {
-    const { blogs } = useManageBlog();
+    const {refetch, blogs } = useManageBlog();
+    const axiosPubic = useAxiosPublic()
+
+    const handleRemove = (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosPubic.delete(`/blogs/${id}`)
+                    .then((res) => {
+                        if (res.data.deletedCount) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            refetch()
+                        }
+                    })
+
+            }
+        });
+    }
 
     return (
         <div className="overflow-x-auto p-4">
             <h1 className="text-2xl font-extrabold text-gray-800 mb-4 text-center">
-                Manage Blogs 
+                Manage Blogs
             </h1>
 
             <table className="w-full border border-gray-300 shadow-md rounded-lg overflow-hidden">
@@ -27,9 +58,8 @@ const ManageBlogs = () => {
                     {blogs.map((blog, index) => (
                         <tr
                             key={blog.id}
-                            className={`border-b ${
-                                index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                            } hover:bg-gray-200 transition`}
+                            className={`border-b ${index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                                } hover:bg-gray-200 transition`}
                         >
                             <td className="px-4 py-3 font-medium text-gray-800">
                                 {blog.author_name}
@@ -42,7 +72,7 @@ const ManageBlogs = () => {
                                 </button>
                             </td>
                             <td className="px-4 py-3">
-                                <button className="bg-red-500 text-white px-4 py-1 rounded-md text-sm hover:bg-red-600 transition">
+                                <button onClick={() => handleRemove(blog._id)} className="bg-red-500 text-white px-4 py-1 rounded-md text-sm hover:bg-red-600 transition">
                                     Delete
                                 </button>
                             </td>
