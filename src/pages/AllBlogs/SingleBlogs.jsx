@@ -4,7 +4,7 @@ import { AiFillLike } from "react-icons/ai";
 import { FaBookmark, FaComment, FaCopy, FaFacebook, FaLinkedin, FaShare, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import { IoMdSend } from "react-icons/io";
 
-import { useLoaderData } from "react-router-dom"
+import { data, useLoaderData } from "react-router-dom"
 import useAxiosPublic from '../../components/Hooks/AxiosPublic/useaxiosPublic';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
@@ -45,13 +45,13 @@ const SingleBlogs = () => {
     }
     const handlerCommentValue = () => {
         // console.log(comment)
-        axiosPublic.post('/comment', {
-            userName: user?.displayName,
-            email: user?.email,
+        axiosPublic.put(`/blogs/${blog._id}`, {
+            comment_user: user?.displayName,
+            date_Of_comment: new Date().toLocaleDateString(),
             comment: comment
         })
             .then(res => {
-                if (res.data.insertedId) {
+                if (res.data.modifiedCount) {
                     Swal.fire({
                         title: 'Comment Posted!',
                         text: 'Your comment has been posted successfully.',
@@ -59,7 +59,6 @@ const SingleBlogs = () => {
                         confirmButtonText: 'Cool!'
                     })
                     setComment("")
-
                 }
             })
             .catch(err => {
@@ -99,22 +98,28 @@ const SingleBlogs = () => {
             </div>
             {/* Comment Input Field */}
             {showComment && (
-                <div className="mt-4 flex gap-4">
-                    <input
-                        name='comment'
-                        type="text"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        placeholder="Write a comment..."
-                        className="w-full border rounded-md p-2 text-gray-700"
-                    />
-                    <button
-                        onClick={handlerCommentValue}
-                        className="px-4 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                    >
-                        <IoMdSend />
+                <div className="mt-4">
+                        <p className="text-gray-600 mt-2 ml-6 text-lg font-semibold">{blog?.comment_user}</p>
+                        <p className="text-gray-600  ml-6 text-sm">{blog?.comment}</p>
+                        <p className="text-gray-600 mt-2 ml-6 text-sm">{ blog?.date_Of_comment}</p>
 
-                    </button>
+                    <div className="mt-4 flex gap-4">
+                        <input
+                            name='comment'
+                            type="text"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                            placeholder="Write a comment..."
+                            className="w-full border rounded-md p-2 text-gray-700"
+                        />
+                        <button
+                            onClick={handlerCommentValue}
+                            className="px-4 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                        >
+                            <IoMdSend />
+
+                        </button>
+                    </div>
                 </div>
             )}
             {/* Share Options */}
