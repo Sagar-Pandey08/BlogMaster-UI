@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from "react";
 import { AiFillLike } from "react-icons/ai";
 import { FaBookmark, FaComment, FaCopy, FaFacebook, FaLinkedin, FaShare, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import { IoMdSend } from "react-icons/io";
 
 import { useLoaderData } from "react-router-dom"
+import useAxiosPublic from '../../components/Hooks/AxiosPublic/useaxiosPublic';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const SingleBlogs = () => {
     const blog = useLoaderData()
+    const axiosPublic = useAxiosPublic()
+    const { user } = useContext(AuthContext)
     // console.log(blog)
     const [liked, setLiked] = useState(false);
     const [likes, setLikes] = useState(blog.likes);
@@ -15,7 +20,6 @@ const SingleBlogs = () => {
     const [comment, setComment] = useState("");
     const [showShareOptions, setShowShareOptions] = useState(false)
     const blogUrl = `${window.location.origin}/blog/${blog._id}`; // Dynamic Blog URL
-
 
     const handleLikeClick = () => {
         if (liked) {
@@ -28,6 +32,7 @@ const SingleBlogs = () => {
 
     const handlerComment = () => {
         setShowComment(!showComment);
+
     }
 
     const handlerShare = () => {
@@ -37,6 +42,35 @@ const SingleBlogs = () => {
     const handleCopyLink = () => {
         navigator.clipboard.writeText(blogUrl);
         alert("Link copied to clipboard!");
+    }
+    const handlerCommentValue = () => {
+        // console.log(comment)
+        axiosPublic.post('/comment', {
+            userName: user?.displayName,
+            email: user?.email,
+            comment: comment
+        })
+            .then(res => {
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        title: 'Comment Posted!',
+                        text: 'Your comment has been posted successfully.',
+                        icon: 'success',
+                        confirmButtonText: 'Cool!'
+                    })
+                    setComment("")
+
+                }
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Failed to post comment. Please try again later.',
+                    icon: 'error',
+                    confirmButtonText: 'Cool!'
+                })
+            })
+
     }
 
 
@@ -67,6 +101,7 @@ const SingleBlogs = () => {
             {showComment && (
                 <div className="mt-4 flex gap-4">
                     <input
+                        name='comment'
                         type="text"
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
@@ -74,7 +109,7 @@ const SingleBlogs = () => {
                         className="w-full border rounded-md p-2 text-gray-700"
                     />
                     <button
-                        onClick={handlerComment}
+                        onClick={handlerCommentValue}
                         className="px-4 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                     >
                         <IoMdSend />
