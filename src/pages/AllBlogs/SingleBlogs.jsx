@@ -43,35 +43,7 @@ const SingleBlogs = () => {
         navigator.clipboard.writeText(blogUrl);
         alert("Link copied to clipboard!");
     }
-    const handlerCommentValue = () => {
-        // console.log(comment)
-        axiosPublic.put(`/blogs/${blog._id}`, {
-            comment_user: user?.displayName,
-            date_Of_comment: new Date().toLocaleDateString(),
-            comment: comment
-        })
-            .then(res => {
-                if (res.data.modifiedCount) {
-                    Swal.fire({
-                        title: 'Comment Posted!',
-                        text: 'Your comment has been posted successfully.',
-                        icon: 'success',
-                        confirmButtonText: 'Cool!'
-                    })
-                    setComment("")
-                }
-            })
-            .catch(err => {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Failed to post comment. Please try again later.',
-                    icon: 'error',
-                    confirmButtonText: 'Cool!'
-                })
-            })
-
-    }
-
+   
 
     return (
 
@@ -99,10 +71,6 @@ const SingleBlogs = () => {
             {/* Comment Input Field */}
             {showComment && (
                 <div className="mt-4">
-                        <p className="text-gray-600 mt-2 ml-6 text-lg font-semibold">{blog?.comment_user}</p>
-                        <p className="text-gray-600  ml-6 text-sm">{blog?.comment}</p>
-                        <p className="text-gray-600 mt-2 ml-6 text-sm">{ blog?.date_Of_comment}</p>
-
                     <div className="mt-4 flex gap-4">
                         <input
                             name='comment'
@@ -113,7 +81,7 @@ const SingleBlogs = () => {
                             className="w-full border rounded-md p-2 text-gray-700"
                         />
                         <button
-                            onClick={handlerCommentValue}
+                            onClick={handlerComment}
                             className="px-4 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                         >
                             <IoMdSend />
