@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillLike } from "react-icons/ai";
 import { FaComment, FaEye, FaShare } from "react-icons/fa";
+import useSaveBlogs from "../../../components/Hooks/useSaveBlogs";
+import useAllBlogs from "../../../components/Hooks/useallBlogs";
 
 // Dummy Data
 const latestBlogs = [
@@ -54,25 +56,29 @@ const whoToFollow = [
   },
 ];
 
-const recentlySaved = [
-  {
-    id: 1,
-    title: "How to Build a Personal Brand",
-    author: "Alice Brown",
-    date: "Feb 10, 2025",
-  },
-  {
-    id: 2,
-    title: "The Power of Habit: Book Summary",
-    author: "David Miller",
-    date: "Feb 05, 2025",
-  },
-];
+
 
 const RightSide = () => {
+  const { savedBlogs } = useSaveBlogs();
+  const { allBlogs } = useAllBlogs();
+  const [saveBlog, setSaveBlog] = useState([]);
+
+  // Use useEffect to update the state without causing an infinite loop
+  useEffect(() => {
+    const blogIds = savedBlogs.map(blog => blog.blogId);
+    setSaveBlog(blogIds);
+  }, [savedBlogs]); // Runs only when savedBlogs changes
+
+  // Filter all blogs that match any of the saved blog IDs
+  const recentlySaved = allBlogs.filter(blog => saveBlog.includes(blog._id));
+
+  // console.log(filter);
+
+
+
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden mb-6 border border-gray-200 p-4 space-y-6">
-      
+
       {/* Latest Blogs Section */}
       <div>
         <h3 className="text-lg font-semibold text-gray-800">Latest Blogs</h3>
@@ -136,8 +142,8 @@ const RightSide = () => {
             <li key={post.id} className="border-b pb-2">
               <h4 className="font-medium text-gray-700">{post.title}</h4>
               <div className="flex justify-between text-xs text-gray-500 mt-1">
-                <span>By {post.author}</span>
-                <span>{post.date}</span>
+                <span>By {post.author_name}</span>
+                <span>{post.date_time}</span>
               </div>
             </li>
           ))}
