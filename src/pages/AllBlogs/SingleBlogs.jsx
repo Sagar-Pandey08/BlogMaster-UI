@@ -4,7 +4,7 @@ import { AiFillLike } from "react-icons/ai";
 import { FaBookmark, FaComment, FaCopy, FaFacebook, FaLinkedin, FaShare, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import { IoMdSend } from "react-icons/io";
 
-import { data, useLoaderData } from "react-router-dom"
+import { data, useLoaderData, useNavigate } from "react-router-dom"
 import useAxiosPublic from '../../components/Hooks/AxiosPublic/useaxiosPublic';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
@@ -13,7 +13,8 @@ const SingleBlogs = () => {
     const blog = useLoaderData()
     const axiosPublic = useAxiosPublic()
     const { user } = useContext(AuthContext)
-    // console.log(blog)
+    const navigate = useNavigate()
+    // console.log(savedBlogs)
     const [liked, setLiked] = useState(false);
     const [likes, setLikes] = useState(blog.likes);
     const [showComment, setShowComment] = useState(false);
@@ -43,7 +44,35 @@ const SingleBlogs = () => {
         navigator.clipboard.writeText(blogUrl);
         alert("Link copied to clipboard!");
     }
-   
+
+    const handlerSave = (id) => {
+        const email = user?.email
+        if(!user){
+            Swal.fire({
+                icon: 'error',
+                title: 'You must be logged in to save this blog',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            return navigate("/login")
+        }
+        axiosPublic.post(`/save-blogs`, {blogId: id, email })
+        .then(res =>{
+            if(res.status === 200){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Blog Saved Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+        
+    }
+
 
     return (
 
@@ -66,7 +95,7 @@ const SingleBlogs = () => {
                     onClick={handleLikeClick} > <AiFillLike className='text-2xl' /> Like {likes}</button>
                 <button onClick={handlerComment} className="flex items-center gap-1"> <FaComment className='text-2xl' /> Comment</button>
                 <button onClick={handlerShare} className="flex items-center gap-1"> <FaShare className='text-2xl' />Share </button>
-                <button className="flex items-center gap-1"> <FaBookmark className='text-2xl' />Save </button>
+                <button onClick={() => handlerSave(blog._id)} className="flex items-center gap-1"> <FaBookmark className='text-2xl' />Save </button>
             </div>
             {/* Comment Input Field */}
             {showComment && (
