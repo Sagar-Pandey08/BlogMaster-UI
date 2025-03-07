@@ -4,10 +4,12 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../components/Hooks/AxiosPublic/useaxiosPublic';
 
 const Login = () => {
-    const {login, googleLogin} = useContext(AuthContext)
+    const { login, googleLogin } = useContext(AuthContext)
     const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
 
 
     const handleSubmit = (e) => {
@@ -16,51 +18,67 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         login(email, password)
-        .then(res =>{
-            if(res.user){
-               Swal.fire({
-                 title: 'Login successful',
-                 text: 'Welcome to SyntaxStory!',
-                 icon:'success',
-                 confirmButtonText: 'Go to Homepage'
-               })
+            .then(res => {
+                if (res.user) {
+                    Swal.fire({
+                        title: 'Login successful',
+                        text: 'Welcome to SyntaxStory!',
+                        icon: 'success',
+                        confirmButtonText: 'Go to Homepage'
+                    })
+                    form.reset();
+                    navigate("/")
+                }
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: 'Error',
+                    text: err.message,
+                    icon: 'error',
+                    confirmButtonText: 'Try again'
+                })
                 form.reset();
-                navigate("/")
-            }
-        })
-        .catch(err => {
-             Swal.fire({
-                 title: 'Error',
-                 text: err.message,
-                 icon: 'error',
-                 confirmButtonText: 'Try again'
-             })
-             form.reset();
-        });
+            });
     };
 
-    const handleGoogle = (e)=>{
+    const handleGoogle = (e) => {
         e.preventDefault();
         googleLogin()
-       .then(res =>{
-         if(res.user){
-             Swal.fire({
-                 title: 'Login successful',
-                 text: 'Welcome to SyntaxStory!',
-                 icon:'success',
-                 confirmButtonText: 'Go to Homepage'
-             })
-             navigate("/")
-         }
-       })
-       .catch(err =>{
-         Swal.fire({
-                 title: 'Error',
-                 text: err.message,
-                 icon: 'error',
-                 confirmButtonText: 'Try again'
-             })
-       })
+            .then(res => {
+                const userInfo = {
+                    name: res.user?.displayName,
+                    email: res.user?.email
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                title: 'Login successful',
+                                text: 'Welcome to SyntaxStory!',
+                                icon: 'success',
+                                confirmButtonText: 'Go to Homepage'
+                            })
+                            navigate("/")
+                        } else {
+                            Swal.fire({
+                                title: 'Login successful',
+                                text: 'Welcome to SyntaxStory!',
+                                icon: 'success',
+                                confirmButtonText: 'Go to Homepage'
+                            })
+                            navigate("/")
+                        }
+                    })
+
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: 'Error',
+                    text: err.message,
+                    icon: 'error',
+                    confirmButtonText: 'Try again'
+                })
+            })
     }
 
     return (

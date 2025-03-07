@@ -1,13 +1,16 @@
 import { useContext, useState } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../components/Hooks/AxiosPublic/useaxiosPublic";
 
 const Register = () => {
     const { register, profileUpdate, googleLogin } = useContext(AuthContext)
+    const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,6 +19,11 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         const imageFirst = form.image.files[0];
+
+        const userInfo = {
+            name: name,
+            email: email
+        }
 
         const formData = new FormData();
         formData.append("image", imageFirst);
@@ -30,16 +38,29 @@ const Register = () => {
                 .then(res => {
                     if (res.user) {
                         profileUpdate(name, image)
-                            .then(() => {
-                                Swal.fire({
-                                    title: "Registration Successful!",
-                                    text: "You can now login with your new account.",
-                                    icon: "success",
-                                    confirmButtonText: "Login",
-                                    confirmButtonColor: "#4caf50"
-                                }).then((result) => {
-                                })
-                                form.reset();
+                        axiosPublic.post("/users", userInfo)
+                            .then((res) => {
+                                if (res.data.insertedId) {
+                                    Swal.fire({
+                                        title: "Registration Successful!",
+                                        text: "You can now login with your new account.",
+                                        icon: "success",
+                                        confirmButtonText: "Cool",
+                                        confirmButtonColor: "#4caf50"
+                                    })
+                                    form.reset();
+                                    navigate('/')
+                                } else {
+                                    Swal.fire({
+                                        title: "Registration Successful!",
+                                        text: "You can now login with your new account.",
+                                        icon: "success",
+                                        confirmButtonText: "Continue",
+                                        confirmButtonColor: "#4caf50"
+                                    })
+                                    form.reset();
+                                    navigate('/')
+                                }
                             })
                             .catch(err => {
                                 console.error(err);
@@ -50,25 +71,41 @@ const Register = () => {
     };
 
 
-    const handleGoogle = (e)=>{
+    const handleGoogle = (e) => {
         e.preventDefault();
         googleLogin()
-           .then(res => {
+            .then(res => {
                 if (res.user) {
+                    const userInfo = {
+                        name: res.user?.displayName,
+                        email: res.user?.email
+                    }
                     profileUpdate(res.user.displayName, res.user.photoURL)
-                        .then(() => {
-                            Swal.fire({
-                                title: "Login Successful!",
-                                text: "You can now use Google Login.",
-                                icon: "success",
-                                confirmButtonText: "Continue",
-                                confirmButtonColor: "#4caf50"
-                            }).then((result) => {
-                            })
+                    axiosPublic.post('/users', userInfo)
+                        .then((res) => {
+                            if (res.data.insertedId){
+                                Swal.fire({
+                                    title: "Register Successful!",
+                                    text: "You can now use Google Login.",
+                                    icon: "success",
+                                    confirmButtonText: "Continue",
+                                    confirmButtonColor: "#4caf50"
+                                })
+                                navigate("/")
+                            }else{
+                                Swal.fire({
+                                    title: "Register Successful!",
+                                    text: "You can now use Google Login.",
+                                    icon: "success",
+                                    confirmButtonText: "Cool",
+                                    confirmButtonColor: "#4caf50"
+                                })
+                                navigate("/")
+                            }
                         })
                 }
             })
-           .catch(err => {
+            .catch(err => {
                 console.error(err);
             })
     }
