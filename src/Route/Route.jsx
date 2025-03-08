@@ -18,6 +18,7 @@ import MyBlog from "../pages/Dashboard/MyBlog/MyBlog";
 import ManageBlogs from "../pages/Dashboard/ManageBlogs/ManageBlogs";
 import UpdateBlog from "../pages/Dashboard/ManageBlogs/UpdateBlog";
 import ManageAllBlogs from "../pages/Dashboard/ManageAllBlogs/ManageAllBlogs";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 
 const Route = createBrowserRouter([
     {
@@ -84,6 +85,10 @@ const Route = createBrowserRouter([
             {
                 path:"manageAllBlogs",
                 element: <ManageAllBlogs></ManageAllBlogs>
+            },
+            {
+                path:'manageUsers',
+                element: <AllUsers></AllUsers>
             }
         ]
     }
