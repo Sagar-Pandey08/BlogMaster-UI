@@ -50,17 +50,9 @@ const Register = () => {
                                     })
                                     form.reset();
                                     navigate('/')
-                                } else {
-                                    Swal.fire({
-                                        title: "Registration Successful!",
-                                        text: "You can now login with your new account.",
-                                        icon: "success",
-                                        confirmButtonText: "Continue",
-                                        confirmButtonColor: "#4caf50"
-                                    })
-                                    form.reset();
-                                    navigate('/')
                                 }
+                                form.reset();
+                                navigate('/')
                             })
                             .catch(err => {
                                 console.error(err);
@@ -75,15 +67,16 @@ const Register = () => {
         e.preventDefault();
         googleLogin()
             .then(res => {
+
+                const userInfo = {
+                    name: res.user?.displayName,
+                    email: res.user?.email
+                }
+                profileUpdate(res.user.displayName, res.user.photoURL)
                 if (res.user) {
-                    const userInfo = {
-                        name: res.user?.displayName,
-                        email: res.user?.email
-                    }
-                    profileUpdate(res.user.displayName, res.user.photoURL)
                     axiosPublic.post('/users', userInfo)
                         .then((res) => {
-                            if (res.data.insertedId){
+                            if (res.data.insertedId) {
                                 Swal.fire({
                                     title: "Register Successful!",
                                     text: "You can now use Google Login.",
@@ -92,17 +85,9 @@ const Register = () => {
                                     confirmButtonColor: "#4caf50"
                                 })
                                 navigate("/")
-                            }else{
-                                Swal.fire({
-                                    title: "Register Successful!",
-                                    text: "You can now use Google Login.",
-                                    icon: "success",
-                                    confirmButtonText: "Cool",
-                                    confirmButtonColor: "#4caf50"
-                                })
-                                navigate("/")
                             }
                         })
+                        navigate('/')
                 }
             })
             .catch(err => {

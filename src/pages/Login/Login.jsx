@@ -6,6 +6,7 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../components/Hooks/AxiosPublic/useaxiosPublic';
 
+
 const Login = () => {
     const { login, googleLogin } = useContext(AuthContext)
     const navigate = useNavigate()
@@ -44,40 +45,28 @@ const Login = () => {
     const handleGoogle = (e) => {
         e.preventDefault();
         googleLogin()
-            .then(res => {
-                const userInfo = {
-                    name: res.user?.displayName,
-                    email: res.user?.email
+            .then((res) => {
+                const name = res.user?.displayName;
+                const email = res.user?.email;
+                const userInfo = { name, email }
+                if (res.user) {
+                    axiosPublic.post("/users", userInfo)
+                        .then(res => {
+                            if (res.data.insertedId) {
+                                Swal.fire({
+                                    title: 'Success',
+                                    text: 'You have successfully signed up!',
+                                    icon: 'success',
+                                    confirmButtonText: 'Go to Homepage'
+                                })
+                                navigate("/")
+                            }
+                        })
                 }
-                axiosPublic.post('/users', userInfo)
-                    .then(res => {
-                        if (res.data.insertedId) {
-                            Swal.fire({
-                                title: 'Login successful',
-                                text: 'Welcome to SyntaxStory!',
-                                icon: 'success',
-                                confirmButtonText: 'Go to Homepage'
-                            })
-                            navigate("/")
-                        } else {
-                            Swal.fire({
-                                title: 'Login successful',
-                                text: 'Welcome to SyntaxStory!',
-                                icon: 'success',
-                                confirmButtonText: 'Go to Homepage'
-                            })
-                            navigate("/")
-                        }
-                    })
-
+                navigate('/')
             })
             .catch(err => {
-                Swal.fire({
-                    title: 'Error',
-                    text: err.message,
-                    icon: 'error',
-                    confirmButtonText: 'Try again'
-                })
+                console.lgo(err.message)
             })
     }
 
