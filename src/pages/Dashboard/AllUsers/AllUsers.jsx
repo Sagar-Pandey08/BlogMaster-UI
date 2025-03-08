@@ -1,10 +1,42 @@
 import React from 'react'
 import useAllUsers from '../../../components/Hooks/useAllUsers'
 import { Link } from 'react-router-dom'
+import useAxiosPublic from '../../../components/Hooks/AxiosPublic/useaxiosPublic'
+import Swal from 'sweetalert2'
 
 const AllUsers = () => {
-    const { users } = useAllUsers()
+    const { refetch, users } = useAllUsers()
+    const axiosPublic = useAxiosPublic()
 
+    const handleRemove = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosPublic.delete(`/users/${id}`)
+                    .then((res) => {
+                        if (res.data.deletedCount) {
+                            Swal.fire({
+                                title: 'User deleted successfully!',
+                                icon:'success',
+                                confirmButtonText: 'Okay'
+                            });
+                            refetch()
+                        }
+                    })
+
+            }
+        })
+        .catch((err )=>{
+            console.log(err.message)
+        })
+    }
     return (
         <div className="overflow-x-auto p-4">
             <h1 className="text-2xl font-extrabold text-gray-800 mb-4 text-center">

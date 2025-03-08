@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const ManageBlogs = () => {
     const { refetch, blogs } = useManageBlog();
-    const axiosPubic = useAxiosPublic()
+    const axiosPublic = useAxiosPublic()
 
     const handleRemove = (id) => {
 
@@ -20,7 +20,7 @@ const ManageBlogs = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPubic.delete(`/blogs/${id}`)
+                axiosPublic.delete(`/blogs/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount) {
                             Swal.fire({
