@@ -3,24 +3,9 @@ import { AiFillLike } from "react-icons/ai";
 import { FaComment, FaEye, FaShare } from "react-icons/fa";
 import useSaveBlogs from "../../../components/Hooks/useSaveBlogs";
 import useAllBlogs from "../../../components/Hooks/useallBlogs";
+import useLatestBlogs from "../../../components/Hooks/useLatestBlogs";
 
-// Dummy Data
-const latestBlogs = [
-  {
-    id: 1,
-    title: "Exploring the Future of AI",
-    description: "How AI is shaping our world in 2025 and beyond.",
-    author: "John Doe",
-    date: "Feb 18, 2025",
-  },
-  {
-    id: 2,
-    title: "Top 10 Travel Destinations",
-    description: "Must-visit places for every traveler in 2025.",
-    author: "Jane Smith",
-    date: "Feb 15, 2025",
-  },
-];
+
 
 const recommendedTopics = [
   "Technology",
@@ -62,6 +47,7 @@ const RightSide = () => {
   const { savedBlogs } = useSaveBlogs();
   const { allBlogs } = useAllBlogs();
   const [saveBlog, setSaveBlog] = useState([]);
+  const {latestBlogs} = useLatestBlogs()
 
   // Use useEffect to update the state without causing an infinite loop
   useEffect(() => {
@@ -86,10 +72,10 @@ const RightSide = () => {
           {latestBlogs.map((blog) => (
             <li key={blog.id} className="border-b pb-2">
               <h4 className="font-medium text-gray-700">{blog.title}</h4>
-              <p className="text-sm text-gray-600">{blog.description}</p>
+              <p className="text-sm text-gray-600">{blog.short_description}</p>
               <div className="flex justify-between text-xs text-gray-500 mt-1">
-                <span>By {blog.author}</span>
-                <span>{blog.date}</span>
+                <span>By {blog.author_name}</span>
+                <span>{blog.date_time}</span>
               </div>
             </li>
           ))}
