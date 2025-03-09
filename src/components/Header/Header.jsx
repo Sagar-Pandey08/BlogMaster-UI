@@ -87,19 +87,13 @@ const Header = () => {
                         {dropdownOpen && (
                             <div className="absolute right-0 mt-3 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-2">
                                 <Link
-                                    to="/profile"
+                                    to="/Profile"
                                     className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                                     onClick={() => setDropdownOpen(false)}
                                 >
-                                    Create Profile
+                                     Profile
                                 </Link>
-                                <Link
-                                    to="/dashboard/writeBlogs"
-                                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                                    onClick={() => setDropdownOpen(false)}
-                                >
-                                    Dashboard
-                                </Link>
+                               
                                 <button
                                     onClick={handleSignOut}
                                     className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
