@@ -9,11 +9,11 @@ import useProfile from "../../components/Hooks/useProfile";
 const Profile = () => {
     const { user } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
-    const {refetch, userData } = useProfile()
+    const { refetch, userData } = useProfile()
     const { myBlogs } = useMyBlogs();
     const [profile, setProfile] = useState({
-        name:  "",
-        email:  "",
+        name: "",
+        email: "",
         bio: "",
         designation: "",
     });
@@ -83,28 +83,31 @@ const Profile = () => {
                     <p className="text-gray-700 mt-2">{pro.bio || "No bio added yet"}</p>
                     <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm mt-2">
                         {pro.designation || "Blogger"}
-                    </span></>
-                )}
+                    </span>
 
-                <div className="flex space-x-4 mt-4">
-                    <Link to="/dashboard/writeBlogs">
-                        <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
-                            Dashboard
-                        </button>
-                    </Link>
-                    {userData.length > 0 ? (
-                        <Link to="/editProfile" className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition">
+                    <div className="flex space-x-4 mt-4">
+                        <Link to="/dashboard/writeBlogs">
+                            <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
+                                Dashboard
+                            </button>
+                        </Link>
+
+                        {pro.bio ? <Link to={`/editProfile/${pro._id}`} className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition">
                             Edit Profile
                         </Link>
-                    ) : (
-                        <button
-                            onClick={handleCreateProfile}
-                            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
-                        >
-                            Create Profile
-                        </button>
-                    )}
-                </div>
+                            :
+                            <button
+                                onClick={handleCreateProfile}
+                                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition"
+                            >
+                                Create Profile
+                            </button>}
+                    </div>
+
+                </>
+                )}
+
+
             </div>
 
             {/* User Blogs */}

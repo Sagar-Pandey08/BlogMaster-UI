@@ -57,8 +57,9 @@ const Route = createBrowserRouter([
                 element: <Profile></Profile>
             },
             {
-                path:'/editProfile',
-                element: <EditProfile></EditProfile>
+                path:'/editProfile/:id',
+                element: <EditProfile></EditProfile>,
+                loader: ({params})=>fetch(`http://localhost:5000/profiles/${params.id}`)
             },
             {
                 path:'/blogs/:id',
