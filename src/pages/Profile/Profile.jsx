@@ -10,11 +10,10 @@ const Profile = () => {
     const { user } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
     const {refetch, userData } = useProfile()
-    console.log(userData)
     const { myBlogs } = useMyBlogs();
     const [profile, setProfile] = useState({
-        name: user.displayName || "",
-        email: user.email || "",
+        name:  "",
+        email:  "",
         bio: "",
         designation: "",
     });
@@ -78,7 +77,7 @@ const Profile = () => {
                     alt="Profile"
                     className="w-24 h-24 rounded-full border-2 border-gray-300 shadow-lg"
                 />
-
+                {/* //data form database */}
                 {userData.map(pro => <> <h2 className="text-2xl font-bold mt-3">{pro.name}</h2>
                     <p className="text-gray-600">{pro.email}</p>
                     <p className="text-gray-700 mt-2">{pro.bio || "No bio added yet"}</p>
@@ -94,9 +93,9 @@ const Profile = () => {
                         </button>
                     </Link>
                     {userData.length > 0 ? (
-                        <button className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition">
+                        <Link to="/editProfile" className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition">
                             Edit Profile
-                        </button>
+                        </Link>
                     ) : (
                         <button
                             onClick={handleCreateProfile}

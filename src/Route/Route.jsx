@@ -20,6 +20,7 @@ import UpdateBlog from "../pages/Dashboard/ManageBlogs/UpdateBlog";
 import ManageAllBlogs from "../pages/Dashboard/ManageAllBlogs/ManageAllBlogs";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Profile from "../pages/Profile/Profile";
+import EditProfile from "../pages/Profile/EditProfile";
 
 const Route = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const Route = createBrowserRouter([
             {
                 path:'/Profile',
                 element: <Profile></Profile>
+            },
+            {
+                path:'/editProfile',
+                element: <EditProfile></EditProfile>
             },
             {
                 path:'/blogs/:id',
