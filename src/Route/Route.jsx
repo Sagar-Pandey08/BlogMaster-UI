@@ -22,6 +22,7 @@ import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/Profile/EditProfile";
 import ManageReview from "../pages/Dashboard/ManageReview/ManageReview";
+import EditReview from "../pages/Dashboard/ManageReview/EditReview";
 
 const Route = createBrowserRouter([
     {
@@ -67,11 +68,7 @@ const Route = createBrowserRouter([
                 element: <SingleBlogs></SingleBlogs>,
                 loader: ({params})=>fetch(`http://localhost:5000/blogs/${params.id}`)
             },
-            {
-                path:'/updateBlog/:id',
-                element: <UpdateBlog></UpdateBlog>,
-                loader: ({params})=>fetch(`http://localhost:5000/blog/${params.id}`)
-            }
+           
         ]
     },
     {
@@ -95,6 +92,11 @@ const Route = createBrowserRouter([
                 element: <ManageBlogs></ManageBlogs>
             },
             {
+                path:'updateBlog/:id',
+                element: <UpdateBlog></UpdateBlog>,
+                loader: ({params})=>fetch(`http://localhost:5000/blog/${params.id}`)
+            },
+            {
                 path:"manageAllBlogs",
                 element: <ManageAllBlogs></ManageAllBlogs>
             },
@@ -105,6 +107,11 @@ const Route = createBrowserRouter([
             {
                 path:'manageReview',
                 element: <ManageReview></ManageReview>
+            },
+            {
+                path:'editReview/:id',
+                element: <EditReview></EditReview>,
+                loader: ({params})=>fetch(`http://localhost:5000/review/${params.id}`)
             }
         ]
     }

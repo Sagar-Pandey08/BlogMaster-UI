@@ -73,7 +73,7 @@ const ManageAllBlogs = () => {
                             <td className="px-4 py-3 text-gray-700">{blog.email}</td>
                             <td className="px-4 py-3 text-gray-700">{blog.title}</td>
                             <td className="px-4 py-3">
-                                <Link to={`/updateBlog/${blog._id}`} className="bg-[#2DAA9E] text-black px-4 py-1 rounded-md text-sm hover:bg-[#80CBC4] transition">
+                                <Link to={`/dashboard/updateBlog/${blog._id}`} className="bg-[#2DAA9E] text-black px-4 py-1 rounded-md text-sm hover:bg-[#80CBC4] transition">
                                     Edit
                                 </Link>
                             </td>

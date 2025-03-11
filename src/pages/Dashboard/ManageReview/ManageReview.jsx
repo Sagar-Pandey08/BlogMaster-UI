@@ -70,7 +70,7 @@ const ManageReview = () => {
                             <td className="px-4 py-3 text-gray-700">{review.designation}</td>
                             <td className="px-4 py-3 text-gray-700">{review.review}</td>
                             <td className="px-4 py-3">
-                                <Link to={`/edit/${review._id}`} className="bg-[#2DAA9E] text-black px-4 py-1 rounded-md text-sm hover:bg-[#80CBC4] transition">
+                                <Link to={`/dashboard/editReview/${review._id}`} className="bg-[#2DAA9E] text-black px-4 py-1 rounded-md text-sm hover:bg-[#80CBC4] transition">
                                     Edit
                                 </Link>
                             </td>
