@@ -21,6 +21,7 @@ import ManageAllBlogs from "../pages/Dashboard/ManageAllBlogs/ManageAllBlogs";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/Profile/EditProfile";
+import ManageReview from "../pages/Dashboard/ManageReview/ManageReview";
 
 const Route = createBrowserRouter([
     {
@@ -100,6 +101,10 @@ const Route = createBrowserRouter([
             {
                 path:'manageUsers',
                 element: <AllUsers></AllUsers>
+            },
+            {
+                path:'manageReview',
+                element: <ManageReview></ManageReview>
             }
         ]
     }
