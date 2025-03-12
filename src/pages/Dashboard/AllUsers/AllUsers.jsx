@@ -7,6 +7,7 @@ import useAxiosSecure from '../../../components/Hooks/useAxiosSecure'
 const AllUsers = () => {
     const { refetch, users } = useAllUsers()
     const axiosSecure = useAxiosSecure()
+    console.log(users)
 
     const handleRemove = (id) => {
         Swal.fire({
@@ -24,7 +25,7 @@ const AllUsers = () => {
                         if (res.data.deletedCount) {
                             Swal.fire({
                                 title: 'User deleted successfully!',
-                                icon:'success',
+                                icon: 'success',
                                 confirmButtonText: 'Okay'
                             });
                             refetch()
@@ -33,10 +34,44 @@ const AllUsers = () => {
 
             }
         })
-        .catch((err )=>{
-            console.log(err.message)
-        })
+            .catch((err) => {
+                console.log(err.message)
+            })
     }
+
+    const handleMakeAdmin = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to make this user admin!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, make admin!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.put(`/users/makeAdmin/${id}`)
+                    .then((res) => {
+                        if (res.data.modifiedCount) {
+                            Swal.fire({
+                                title: 'User made admin successfully!',
+                                icon: 'success',
+                                confirmButtonText: 'Okay'
+                            });
+                            refetch()
+                        }
+                    })
+
+            }
+        })
+            .catch((err) => {
+                console.log(err.message)
+            })
+    }
+
+
+
+
     return (
         <div className="overflow-x-auto p-4">
             <h1 className="text-2xl font-extrabold text-gray-800 mb-4 text-center">
@@ -69,9 +104,15 @@ const AllUsers = () => {
                             </td>
                             <td className="px-4 py-3 text-gray-700">{user.email}</td>
                             <td className="px-4 py-3">
-                                <Link to={`/makeAdmin/${user._id}`} className="bg-[#2DAA9E] text-black px-4 py-1 rounded-md text-sm hover:bg-[#80CBC4] transition">
-                                    Make Admin
-                                </Link>
+                                {user?.role === "admin" ? (
+                                    <button className="bg-green-500 text-black px-4 py-1 rounded-md text-sm hover:bg-green-600 transition">
+                                        Admin
+                                    </button>
+                                ) : (
+                                    <button onClick={() => handleMakeAdmin(user._id)} className="bg-blue-500 text-white px-4 py-1 rounded-md text-sm hover:bg-blue-600 transition">
+                                        Make Admin
+                                    </button>
+                                )}
                             </td>
                             <td className="px-4 py-3">
                                 <button onClick={() => handleRemove(user._id)} className="bg-red-500 text-white px-4 py-1 rounded-md text-sm hover:bg-red-600 transition">
