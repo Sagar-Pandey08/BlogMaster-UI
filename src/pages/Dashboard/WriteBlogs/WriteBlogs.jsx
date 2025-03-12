@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-// import useAxiosPublic from '../../../components/Hooks/AxiosPublic/useaxiosPublic';
+import useAxiosPublic from '../../../components/Hooks/AxiosPublic/useaxiosPublic';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import useAxiosSecure from '../../../components/Hooks/useAxiosSecure';
 
 const WriteBlogs = () => {
-  // const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure()
+  const axiosPublic = useAxiosPublic();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +25,7 @@ const WriteBlogs = () => {
     axios.post("https://api.imgbb.com/1/upload?key=425000ec487abe2b84d0bb7de5769c3a", formData)
       .then((res) => {
         const imageUrl = res.data.data.url;
-        return axiosSecure.post('/blogs', {
+        return axiosPublic.post('/blogs', {
           title,
           short_description: description,
           blog_details: details,

@@ -7,7 +7,6 @@ import useAxiosSecure from '../../../components/Hooks/useAxiosSecure'
 const AllUsers = () => {
     const { refetch, users } = useAllUsers()
     const axiosSecure = useAxiosSecure()
-    console.log(users)
 
     const handleRemove = (id) => {
         Swal.fire({
