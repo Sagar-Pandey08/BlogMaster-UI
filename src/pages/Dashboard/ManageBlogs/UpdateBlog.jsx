@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import useAxiosPublic from '../../../components/Hooks/AxiosPublic/useaxiosPublic';
 import Swal from 'sweetalert2';
 import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
+import useAxiosSecure from '../../../components/Hooks/useAxiosSecure';
 
 const UpdateBlog = () => {
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const blog = useLoaderData();
 
     const handleSubmit = async (e) => {
@@ -37,7 +37,7 @@ const UpdateBlog = () => {
                 }
             }
 
-            const updateRes = await axiosPublic.put(`/blog/${blog._id}`, {
+            const updateRes = await axiosSecure.put(`/blog/${blog._id}`, {
                 title,
                 short_description: description,
                 blog_details: details,

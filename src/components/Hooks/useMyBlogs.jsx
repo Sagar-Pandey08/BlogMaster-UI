@@ -1,16 +1,16 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../../AuthProvider/AuthProvider'
-import useAxiosPublic from './AxiosPublic/useaxiosPublic'
 import { useQuery } from '@tanstack/react-query'
+import useAxiosSecure from './useAxiosSecure'
 
 const useMyBlogs = () => {
     const { user } = useContext(AuthContext)
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
 
     const { data: myBlogs = [] } = useQuery({
         queryKey: ['myBlogs', user?.email],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/blog?email=${user?.email}`)
+            const res = await axiosSecure.get(`/blog?email=${user?.email}`)
             return res.data;
         }
     })

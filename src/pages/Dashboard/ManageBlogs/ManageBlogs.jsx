@@ -1,12 +1,12 @@
 import React from 'react';
 import useManageBlog from '../../../components/Hooks/useManageBlog';
-import useAxiosPublic from '../../../components/Hooks/AxiosPublic/useaxiosPublic';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import useAxiosSecure from '../../../components/Hooks/useAxiosSecure';
 
 const ManageBlogs = () => {
     const { refetch, blogs } = useManageBlog();
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
 
     const handleRemove = (id) => {
 
@@ -20,7 +20,7 @@ const ManageBlogs = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`/blogs/${id}`)
+                axiosSecure.delete(`/blogs/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount) {
                             Swal.fire({
