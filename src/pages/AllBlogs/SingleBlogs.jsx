@@ -5,13 +5,13 @@ import { FaBookmark, FaComment, FaCopy, FaFacebook, FaLinkedin, FaShare, FaTwitt
 import { IoMdSend } from "react-icons/io";
 
 import { data, useLoaderData, useNavigate } from "react-router-dom"
-import useAxiosPublic from '../../components/Hooks/AxiosPublic/useaxiosPublic';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import useAxiosSecure from '../../components/Hooks/useAxiosSecure';
 
 const SingleBlogs = () => {
     const blog = useLoaderData()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { user } = useContext(AuthContext)
     const navigate = useNavigate()
     // console.log(savedBlogs)
@@ -56,7 +56,7 @@ const SingleBlogs = () => {
             })
             return navigate("/login")
         }
-        axiosPublic.post(`/save-blogs`, {blogId: id, email })
+        axiosSecure.post(`/save-blogs`, {blogId: id, email })
         .then(res =>{
             if(res.status === 200){
                 Swal.fire({

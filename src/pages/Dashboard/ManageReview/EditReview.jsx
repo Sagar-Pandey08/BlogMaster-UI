@@ -1,11 +1,11 @@
 import React from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom'
-import useAxiosPublic from '../../../components/Hooks/AxiosPublic/useaxiosPublic'
 import Swal from 'sweetalert2'
+import useAxiosSecure from '../../../components/Hooks/useAxiosSecure'
 
 const EditReview = () => {
     const reviews = useLoaderData()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure= useAxiosSecure()
     const navigate = useNavigate()
 
     const handleEdit = (e) => {
@@ -15,7 +15,7 @@ const EditReview = () => {
         const designation = e.target.designation.value
         const review = e.target.message.value
 
-        axiosPublic.put(`/review/${reviews._id}`, { name, designation, review })
+        axiosSecure.put(`/review/${reviews._id}`, { name, designation, review })
             .then((res) => {
                 if (res.data.modifiedCount) {
                     Swal.fire({

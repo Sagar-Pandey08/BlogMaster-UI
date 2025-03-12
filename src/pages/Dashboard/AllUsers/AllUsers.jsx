@@ -1,12 +1,12 @@
 import React from 'react'
 import useAllUsers from '../../../components/Hooks/useAllUsers'
 import { Link } from 'react-router-dom'
-import useAxiosPublic from '../../../components/Hooks/AxiosPublic/useaxiosPublic'
 import Swal from 'sweetalert2'
+import useAxiosSecure from '../../../components/Hooks/useAxiosSecure'
 
 const AllUsers = () => {
     const { refetch, users } = useAllUsers()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
 
     const handleRemove = (id) => {
         Swal.fire({
@@ -19,7 +19,7 @@ const AllUsers = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`/users/${id}`)
+                axiosSecure.delete(`/users/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount) {
                             Swal.fire({

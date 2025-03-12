@@ -1,12 +1,12 @@
 import React from 'react'
 import useReview from '../../../components/Hooks/useReview'
 import { Link } from 'react-router-dom'
-import useAxiosPublic from '../../../components/Hooks/AxiosPublic/useaxiosPublic'
 import Swal from 'sweetalert2'
+import useAxiosSecure from '../../../components/Hooks/useAxiosSecure'
 
 const ManageReview = () => {
     const { refetch, reviews } = useReview()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
 
 
     const handleRemove = (id) => {
@@ -20,7 +20,7 @@ const ManageReview = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`/review/${id}`)
+                axiosSecure.delete(`/review/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount) {
                             Swal.fire({
