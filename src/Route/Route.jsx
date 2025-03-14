@@ -23,6 +23,7 @@ import Profile from "../pages/Profile/Profile";
 import EditProfile from "../pages/Profile/EditProfile";
 import ManageReview from "../pages/Dashboard/ManageReview/ManageReview";
 import EditReview from "../pages/Dashboard/ManageReview/EditReview";
+import AddAuthor from "../pages/Dashboard/AddAuthor/AddAuthor";
 
 const Route = createBrowserRouter([
     {
@@ -112,6 +113,10 @@ const Route = createBrowserRouter([
                 path:'editReview/:id',
                 element: <EditReview></EditReview>,
                 loader: ({params})=>fetch(`http://localhost:5000/review/${params.id}`)
+            },
+            {
+                path: "addAuthor",
+                element: <AddAuthor></AddAuthor>
             }
         ]
     }

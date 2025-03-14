@@ -62,7 +62,7 @@ const ManageAllBlogs = () => {
                 <tbody>
                     {allBlogs.map((blog, index) => (
                         <tr
-                            key={blog.id}
+                            key={blog._id}
                             className={`border-b ${index % 2 === 0 ? "bg-gray-100" : "bg-white"
                                 } hover:bg-gray-200 transition`}
                         >

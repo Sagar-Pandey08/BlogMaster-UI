@@ -20,7 +20,7 @@ const Dashboard = () => {
                 <div className={`bg-[#EFDCAB]  p-5 w-64 space-y-4 transition-all duration-300 ${isOpen ? 'block' : 'hidden'} md:block`}>
                     <ul className='space-y-2'>
                         {isAdmin ? <>  {/* Admin Route */}
-                            <li><NavLink to='/addAuthor' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><IoMdAddCircle /> Add Author</NavLink></li>
+                            <li><NavLink to='/dashboard/addAuthor' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><IoMdAddCircle /> Add Author</NavLink></li>
                             <li><NavLink to='/dashboard/manageUsers' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaUser /> Manage Users</NavLink></li>
                             <li><NavLink to='/dashboard/manageAllBlogs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaList /> Manage Blogs</NavLink></li>
                             <li><NavLink to='/dashboard/manageReview' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaComment /> Manage Review</NavLink></li>
