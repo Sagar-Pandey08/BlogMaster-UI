@@ -10,7 +10,7 @@ const Profile = () => {
     const { user } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
     const { refetch, userData } = useProfile();
-    console.log(userData)
+    // console.log(userData)
     const { myBlogs } = useMyBlogs();
 
     // Create Profile Pop-up
@@ -67,19 +67,19 @@ const Profile = () => {
                 />
                 <h2 className="text-2xl font-bold mt-3">{user?.displayName}</h2>
                 <p className="text-gray-600">{user?.email}</p>
-               {userData.map(pro=><>
-                <p className="text-gray-700 mt-2">{pro?.bio || "No bio added yet"}</p>
-                <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm mt-2">
-                   {pro?.designation || "No designation added yet"}
-                </span></>)}
+                {userData.map(pro => <>
+                    <p className="text-gray-700 mt-2">{pro?.bio || "No bio added yet"}</p>
+                    <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm mt-2">
+                        {pro?.designation || "No designation added yet"}
+                    </span></>)}
                 <div className="flex space-x-4 mt-4">
                     <Link to="/dashboard/writeBlogs">
                         <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
                             Dashboard
                         </button>
                     </Link>
-                    {userData?.bio ? (
-                        <Link to={`/editProfile/${userData._id}`} className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition">
+                    {userData.length > 0 && userData[0]?.bio ? (
+                        <Link to={`/editProfile/${userData[0]._id}`} className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition">
                             Edit Profile
                         </Link>
                     ) : (
@@ -90,6 +90,7 @@ const Profile = () => {
                             Create Profile
                         </button>
                     )}
+
                 </div>
             </div>
 
