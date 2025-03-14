@@ -49,7 +49,7 @@ const AllUsers = () => {
             confirmButtonText: "Yes, make admin!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.put(`/users/makeAdmin/${id}`)
+                axiosSecure.put(`/users/admin/${id}`)
                     .then((res) => {
                         if (res.data.modifiedCount) {
                             Swal.fire({
