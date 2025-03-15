@@ -7,11 +7,11 @@ import { IoMdSend } from "react-icons/io";
 import { data, useLoaderData, useNavigate } from "react-router-dom"
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
-import useAxiosSecure from '../../components/Hooks/useAxiosSecure';
+import useAxiosPublic from '../../components/Hooks/AxiosPublic/useaxiosPublic';
 
 const SingleBlogs = () => {
     const blog = useLoaderData()
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const { user } = useContext(AuthContext)
     const navigate = useNavigate()
     // console.log(savedBlogs)
@@ -56,7 +56,7 @@ const SingleBlogs = () => {
             })
             return navigate("/login")
         }
-        axiosSecure.post(`/save-blogs`, {blogId: id, email })
+        axiosPublic.post(`/save-blogs`, {blogId: id, email })
         .then(res =>{
             if(res.status === 200){
                 Swal.fire({
