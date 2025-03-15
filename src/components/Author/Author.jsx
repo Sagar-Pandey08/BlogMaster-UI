@@ -1,58 +1,11 @@
 import React from "react";
 import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
+import useAuthors from "../Hooks/useAuthors";
 
-const authors = [
-    {
-        name: "John Doe",
-        bio: "Tech Enthusiast | Blogger | Developer",
-        img: "https://i.ibb.co.com/rM2S9bf/author.jpg",
-        twitter: "#",
-        linkedin: "#",
-        github: "#",
-    },
-    {
-        name: "Jane Smith",
-        bio: "UX Designer | Writer | Speaker",
-        img: "https://i.ibb.co.com/8m0ydTC/aa.webp",
-        twitter: "#",
-        linkedin: "#",
-        github: "#",
-    },
-    {
-        name: "Alina Johnson",
-        bio: "AI Researcher | Developer | Innovator",
-        img: "https://i.ibb.co.com/VYsRKRm/second.jpg",
-        twitter: "#",
-        linkedin: "#",
-        github: "#",
-    },
-    {
-        name: "Mike Brown",
-        bio: "Data Scientist | Blogger | Tech Speaker",
-        img: "https://i.ibb.co.com/C29J8yW/first.jpg",
-        twitter: "#",
-        linkedin: "#",
-        github: "#",
-    },
-    {
-        name: "Chris Brown",
-        bio: "Analytics | Teacher | Writer",
-        img: "https://i.ibb.co.com/QjHk5mS/a.jpg",
-        twitter: "#",
-        linkedin: "#",
-        github: "#",
-    },
-    {
-        name: "Sarah Wilson",
-        bio: "Cloud Engineer | DevOps Enthusiast | Speaker",
-        img: "https://i.ibb.co.com/5K4pBtN/office.jpg",
-        twitter: "#",
-        linkedin: "#",
-        github: "#",
-    },
-];
+
 
 const Author = () => {
+    const {authors} = useAuthors()
     return (
         <div className="max-w-7xl mx-auto py-16 px-8">
             <h1 className="text-5xl font-extrabold text-center mb-6 text-gray-900 tracking-wide">Meet Our Authors</h1>
