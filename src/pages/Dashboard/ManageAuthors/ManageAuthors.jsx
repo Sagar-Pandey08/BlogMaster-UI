@@ -1,11 +1,45 @@
 import React from 'react'
 import useManageAuthors from '../../../components/Hooks/useManageAuthors'
 import { Link } from 'react-router-dom'
+import useAxiosSecure from '../../../components/Hooks/useAxiosSecure'
+import Swal from 'sweetalert2'
 
 const ManageAuthors = () => {
-    const {authors} = useManageAuthors()
-  return (
-    <div className="overflow-x-auto p-4">
+    const { authors, refetch } = useManageAuthors()
+    const axiosSecure = useAxiosSecure()
+
+    const handleRemove = (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/author/${id}`)
+                    .then((res) => {
+                        if (res.data.deletedCount) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            refetch()
+                        }
+                    })
+
+            }
+        });
+    }
+
+
+
+    return (
+        <div className="overflow-x-auto p-4">
             <h1 className="text-2xl font-extrabold text-gray-800 mb-4 text-center">
                 Manage All authors
             </h1>
@@ -50,7 +84,7 @@ const ManageAuthors = () => {
                 </tbody>
             </table>
         </div>
-  )
+    )
 }
 
 export default ManageAuthors
