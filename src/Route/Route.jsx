@@ -25,6 +25,7 @@ import ManageReview from "../pages/Dashboard/ManageReview/ManageReview";
 import EditReview from "../pages/Dashboard/ManageReview/EditReview";
 import AddAuthor from "../pages/Dashboard/AddAuthor/AddAuthor";
 import UpdateAllBlogs from "../pages/Dashboard/ManageAllBlogs/UpdateAllBlogs";
+import ManageAuthors from "../pages/Dashboard/ManageAuthors/ManageAuthors";
 
 const Route = createBrowserRouter([
     {
@@ -124,6 +125,10 @@ const Route = createBrowserRouter([
             {
                 path: "addAuthor",
                 element: <AddAuthor></AddAuthor>
+            },
+            {
+                path: "manageAuthors",
+                element: <ManageAuthors></ManageAuthors>
             }
         ]
     }

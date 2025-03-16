@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { FaBars, FaPen, FaHome, FaUser, FaList, FaComment, FaCog, FaAd } from 'react-icons/fa';
+import { FaBars, FaPen, FaHome, FaUser, FaList, FaComment, FaCog, FaAd, FaUsers } from 'react-icons/fa';
 import useAdmin from '../components/Hooks/useAdmin';
 import { IoMdAddCircle } from 'react-icons/io';
 
@@ -24,13 +24,11 @@ const Dashboard = () => {
                             <li><NavLink to='/dashboard/manageUsers' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaUser /> Manage Users</NavLink></li>
                             <li><NavLink to='/dashboard/manageAllBlogs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaList /> Manage Blogs</NavLink></li>
                             <li><NavLink to='/dashboard/manageReview' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaComment /> Manage Review</NavLink></li>
+                            <li><NavLink to='/dashboard/manageAuthors' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaUsers /> Manage Authors</NavLink></li>
                             <li><NavLink to='/' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#EFDCAB] text-gray-900 hover:text-black transition duration-300'><FaHome /> Home</NavLink></li></> : <> <li><NavLink to='/dashboard/writeBlogs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaPen /> Write Blogs</NavLink></li>
                             <li><NavLink to='/dashboard/manageBlogs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaList /> Manage Blogs</NavLink></li>
                             <li><NavLink to='/dashboard/feedback' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaComment /> Send Feedback</NavLink></li>
                             <li><NavLink to='/' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#EFDCAB] text-gray-900 hover:text-black transition duration-300'><FaHome /> Home</NavLink></li></>}
-
-
-
                     </ul>
                 </div>
 
