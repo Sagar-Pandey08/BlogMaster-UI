@@ -27,6 +27,7 @@ import AddAuthor from "../pages/Dashboard/AddAuthor/AddAuthor";
 import UpdateAllBlogs from "../pages/Dashboard/ManageAllBlogs/UpdateAllBlogs";
 import ManageAuthors from "../pages/Dashboard/ManageAuthors/ManageAuthors";
 import UpdateAuthor from "../pages/Dashboard/ManageAuthors/UpdateAuthor";
+import AdminRoute from "../pages/PrivateRoute/AdminRoute";
 
 const Route = createBrowserRouter([
     {
@@ -43,98 +44,98 @@ const Route = createBrowserRouter([
                 element: <About></About>
             },
             {
-                path:'/allBlogs',
+                path: '/allBlogs',
                 element: <AllBlogs></AllBlogs>
             },
             {
-                path:'/register',
+                path: '/register',
                 element: <Register></Register>
             },
             {
-                path:'/login',
+                path: '/login',
                 element: <Login></Login>
             },
             {
-                path:'/contact',
+                path: '/contact',
                 element: <ContactPage></ContactPage>
             },
             {
-                path:'/Profile',
+                path: '/Profile',
                 element: <Profile></Profile>
             },
             {
-                path:'/editProfile/:id',
+                path: '/editProfile/:id',
                 element: <EditProfile></EditProfile>,
-                loader: ({params})=>fetch(`http://localhost:5000/profiles/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/profiles/${params.id}`)
             },
             {
-                path:'/blogs/:id',
+                path: '/blogs/:id',
                 element: <SingleBlogs></SingleBlogs>,
-                loader: ({params})=>fetch(`http://localhost:5000/blogs/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
             },
-           
+
         ]
     },
     {
-        path:"/dashboard",
+        path: "/dashboard",
         element: <Dashboard></Dashboard>,
-        children:[
+        children: [
             {
-                path:"writeBlogs",
+                path: "writeBlogs",
                 element: <PrivateRoute> <WriteBlogs></WriteBlogs></PrivateRoute>
             },
             {
-                path:'feedback',
+                path: 'feedback',
                 element: <Feedback></Feedback>
             },
             {
-                path:'myBlog',
+                path: 'myBlog',
                 element: <MyBlog></MyBlog>
             },
             {
-                path:'manageBlogs',
+                path: 'manageBlogs',
                 element: <ManageBlogs></ManageBlogs>
             },
             {
-                path:'updateBlog/:id',
+                path: 'updateBlog/:id',
                 element: <UpdateBlog></UpdateBlog>,
-                loader: ({params})=>fetch(`http://localhost:5000/blog/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/blog/${params.id}`)
             },
             //admin route
             {
-                path:"manageAllBlogs",
-                element: <ManageAllBlogs></ManageAllBlogs>
+                path: "manageAllBlogs",
+                element: <AdminRoute><ManageAllBlogs></ManageAllBlogs></AdminRoute>
             },
             {
-                path:'updateAllBlogs/:id',
-                element: <UpdateAllBlogs></UpdateAllBlogs>,
-                loader: ({params})=>fetch(`http://localhost:5000/blogs/${params.id}`)
+                path: 'updateAllBlogs/:id',
+                element: <AdminRoute><UpdateAllBlogs></UpdateAllBlogs></AdminRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
             },
             {
-                path:'manageUsers',
-                element: <AllUsers></AllUsers>
+                path: 'manageUsers',
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
-                path:'manageReview',
-                element: <ManageReview></ManageReview>
+                path: 'manageReview',
+                element: <AdminRoute><ManageReview></ManageReview></AdminRoute>
             },
             {
-                path:'editReview/:id',
-                element: <EditReview></EditReview>,
-                loader: ({params})=>fetch(`http://localhost:5000/review/${params.id}`)
+                path: 'editReview/:id',
+                element: <AdminRoute><EditReview></EditReview></AdminRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/review/${params.id}`)
             },
             {
                 path: "addAuthor",
-                element: <AddAuthor></AddAuthor>
+                element: <AdminRoute><AddAuthor></AddAuthor></AdminRoute>
             },
             {
                 path: "manageAuthors",
-                element: <ManageAuthors></ManageAuthors>
+                element: <AdminRoute> <ManageAuthors></ManageAuthors></AdminRoute>
             },
             {
-                path:'updateAuthor/:id',
-                element: <UpdateAuthor></UpdateAuthor>,
-                loader: ({params})=>fetch(`http://localhost:5000/author/${params.id}`)
+                path: 'updateAuthor/:id',
+                element: <AdminRoute><UpdateAuthor></UpdateAuthor></AdminRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/author/${params.id}`)
             },
         ]
     }
