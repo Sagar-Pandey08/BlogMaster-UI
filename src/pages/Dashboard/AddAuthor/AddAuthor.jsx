@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../components/Hooks/AxiosPublic/useaxiosPublic";
+import useAxiosSecure from "../../../components/Hooks/useAxiosSecure";
 
 const AddAuthor = () => {
-  const axiosPublic = useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ const AddAuthor = () => {
           linkedin: linkedin,
           github: github
         }
-        return axiosPublic.post('/addAuthor', info)
+        return axiosSecure.post('/addAuthor', info)
       })
       .then((res) => {
         if (res.data.insertedId) {

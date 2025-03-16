@@ -26,6 +26,7 @@ import EditReview from "../pages/Dashboard/ManageReview/EditReview";
 import AddAuthor from "../pages/Dashboard/AddAuthor/AddAuthor";
 import UpdateAllBlogs from "../pages/Dashboard/ManageAllBlogs/UpdateAllBlogs";
 import ManageAuthors from "../pages/Dashboard/ManageAuthors/ManageAuthors";
+import UpdateAuthor from "../pages/Dashboard/ManageAuthors/UpdateAuthor";
 
 const Route = createBrowserRouter([
     {
@@ -129,7 +130,12 @@ const Route = createBrowserRouter([
             {
                 path: "manageAuthors",
                 element: <ManageAuthors></ManageAuthors>
-            }
+            },
+            {
+                path:'updateAuthor/:id',
+                element: <UpdateAuthor></UpdateAuthor>,
+                loader: ({params})=>fetch(`http://localhost:5000/author/${params.id}`)
+            },
         ]
     }
 ]);

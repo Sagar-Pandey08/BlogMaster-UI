@@ -8,7 +8,7 @@ const useManageAuthors = () => {
     const { data: authors = [], refetch } = useQuery({
         queryKey: ['authors'],
         queryFn: async () => {
-            const rest = await axiosSecure.get("/authors")
+            const rest = await axiosSecure.get("/author")
             return rest.data
         }
     })

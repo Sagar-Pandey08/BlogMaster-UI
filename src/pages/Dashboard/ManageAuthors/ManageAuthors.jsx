@@ -36,7 +36,7 @@ const ManageAuthors = () => {
                             </td>
                             <td className="px-4 py-3 text-gray-700">{author.bio}</td>
                             <td className="px-4 py-3">
-                                <Link to={`/dashboard/updateAuthors/${author._id}`} className="bg-[#2DAA9E] text-black px-4 py-1 rounded-md text-sm hover:bg-[#80CBC4] transition">
+                                <Link to={`/dashboard/updateAuthor/${author._id}`} className="bg-[#2DAA9E] text-black px-4 py-1 rounded-md text-sm hover:bg-[#80CBC4] transition">
                                     Edit
                                 </Link>
                             </td>
