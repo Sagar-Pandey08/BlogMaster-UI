@@ -66,12 +66,12 @@ const Route = createBrowserRouter([
             {
                 path: '/editProfile/:id',
                 element: <EditProfile></EditProfile>,
-                loader: ({ params }) => fetch(`http://localhost:5000/profiles/${params.id}`)
+                loader: ({ params }) => fetch(`https://blogging-server-side.vercel.app/profiles/${params.id}`)
             },
             {
                 path: '/blogs/:id',
                 element: <SingleBlogs></SingleBlogs>,
-                loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
+                loader: ({ params }) => fetch(`https://blogging-server-side.vercel.app/blogs/${params.id}`)
             },
 
         ]
@@ -99,7 +99,7 @@ const Route = createBrowserRouter([
             {
                 path: 'updateBlog/:id',
                 element: <UpdateBlog></UpdateBlog>,
-                loader: ({ params }) => fetch(`http://localhost:5000/blog/${params.id}`)
+                loader: ({ params }) => fetch(`https://blogging-server-side.vercel.app/blog/${params.id}`)
             },
             //admin route
             {
@@ -109,7 +109,7 @@ const Route = createBrowserRouter([
             {
                 path: 'updateAllBlogs/:id',
                 element: <AdminRoute><UpdateAllBlogs></UpdateAllBlogs></AdminRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/blogs/${params.id}`)
+                loader: ({ params }) => fetch(`https://blogging-server-side.vercel.app/blogs/${params.id}`)
             },
             {
                 path: 'manageUsers',
@@ -122,7 +122,7 @@ const Route = createBrowserRouter([
             {
                 path: 'editReview/:id',
                 element: <AdminRoute><EditReview></EditReview></AdminRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/review/${params.id}`)
+                loader: ({ params }) => fetch(`https://blogging-server-side.vercel.app/review/${params.id}`)
             },
             {
                 path: "addAuthor",
@@ -135,7 +135,7 @@ const Route = createBrowserRouter([
             {
                 path: 'updateAuthor/:id',
                 element: <AdminRoute><UpdateAuthor></UpdateAuthor></AdminRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/author/${params.id}`)
+                loader: ({ params }) => fetch(`https://blogging-server-side.vercel.app/author/${params.id}`)
             },
         ]
     }

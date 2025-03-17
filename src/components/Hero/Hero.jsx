@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { TypeAnimation } from 'react-type-animation'
 const Hero = () => {
     return (
@@ -29,8 +30,8 @@ const Hero = () => {
                         Connect with like-minded individuals and make an impact through your words.
                     </p>
                     <div className='flex justify-center gap-4'>
-                        <button className="px-3 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md">Write a Blog</button>
-                        <button className="px-3 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-md">Read Blogs</button>
+                        <Link to={"/dashboard/writeBlogs"} className="px-3 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md">Write a Blog</Link>
+                        <Link to={"/allBlogs"} className="px-3 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-md">Read Blogs</Link>
                     </div>
                 </div>
             </div>
