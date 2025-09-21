@@ -1,7 +1,9 @@
 
-# Blogging Platform Website
+# BlogMaster Platform Website
 
-A full-featured **Blogging Platform Web Application** built using the MERN Stack, where users can write, update, and manage blogs. The platform also includes profile management, saved blogs, feedback, and contact features. Admins have advanced capabilities to manage users, blogs, reviews, and authors.
+A full-featured Blogging Platform Web Application built using the MERN Stack, where users can write, update, and manage blogs. The platform also includes profile management, saved blogs, feedback, and contact features. Admins have advanced capabilities to manage users, blogs, reviews, and authors.
+
+This version also introduces new enhancements: AI-powered blog suggestions, rich text editor for creating blogs, and dark mode support for better user experience.
 
 ---
 
@@ -33,6 +35,7 @@ A full-featured **Blogging Platform Web Application** built using the MERN Stack
 - **Submit Feedback** about the platform
 - **User Profile** creation and editing
 - **View and Manage Saved Blogs**
+- **Rich Text Editor for creating formatted posts**
 
 ### Admin Features:
 - **Manage All Blogs** (update/delete)
